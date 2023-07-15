@@ -1,8 +1,11 @@
 HEAD
 # TidierDates
 The goal of TidierDates is to replicate the consistent and easy way to work with dates of the Lubridate package in R. This package was designed to be compatible with Tidier.jl chains, but can also be used independently.
-```
+
 # mdy(), dmy(), ymd(): These functions parse dates represented as strings into a DateTime format in Julia. The input should be a string month-day-year, day-month-year, or year-month-day format respectively. They are relatively robust in their ability to take non-uniform strings of dates 
+```
+Using Tidier
+
 df = DataFrame(date = ["today is the 4th July, 2000", 
                         "ayer fue 13th Oct 2001", 
                         "3 of Mar, 2002 was a fun day", 
@@ -29,10 +32,9 @@ df2 = DataFrame(date = ["20190330120141", "2008-04-05 16-23-07", "2010.06.07 19:
 
 
 ### ymd_hms(), round_date(), floor_date()
+floor_date(): This function rounds a date down to the nearest specified unit (e.g., hour, minute, day, month, year). It takes two arguments - a Date or DateTime object and a string indicating the unit of time to which the date should be floored.
+round_date(): This function rounds a date to the nearest specified unit (e.g., hour, minute, month, year). Like floor_date(), it takes a Date or DateTime object and a string indicating the unit of time for rounding. Note that rounding to the nearest day might not yield accurate results until YMDHMS format is supported in Julia.
 ```
-#floor_date(): This function rounds a date down to the nearest specified unit (e.g., hour, minute, day, month, year). It takes two arguments - a Date or DateTime object and a string indicating the unit of time to which the date should be floored.
-#round_date(): This function rounds a date to the nearest specified unit (e.g., hour, minute, month, year). Like floor_date(), it takes a Date or DateTime object and a string indicating the unit of time for rounding. Note that rounding to the nearest day might not yield accurate results until YMDHMS format is supported in Julia.
-using Tidier
 @chain df2 begin
     @mutate(date = ymd_hms(date))
     @mutate(floor_byhr = floor_date(date, "hour"))
