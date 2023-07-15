@@ -2,7 +2,8 @@ HEAD
 # TidierDates
 The goal of TidierDates is to replicate the consistent and easy way to work with dates of the Lubridate package in R. This package was designed to be compatible with Tidier.jl chains, but can also be used independently.
 
-# mdy(), dmy(), ymd(): These functions parse dates represented as strings into a DateTime format in Julia. The input should be a string month-day-year, day-month-year, or year-month-day format respectively. They are relatively robust in their ability to take non-uniform strings of dates 
+### mdy(), dmy(), ymd(): 
+#### These functions parse dates represented as strings into a DateTime format in Julia. The input should be a string month-day-year, day-month-year, or year-month-day format respectively. They are relatively robust in their ability to take non-uniform strings of dates 
 ```
 Using Tidier
 
@@ -21,7 +22,8 @@ df = DataFrame(date = ["today is the 4th July, 2000",
 end
 ```
 
-### mdy_hms(), dmy_hms(), ymd_hms(): Similar to the previous group, these functions parse date-time strings in month-day-year, day-month-year, or year-month-day format respectively. The input should include both date and time information.
+### mdy_hms(), dmy_hms(), ymd_hms():
+#### Similar to the previous group, these functions parse date-time strings in month-day-year, day-month-year, or year-month-day format respectively. The input should include both date and time information.
 ```
 df2 = DataFrame(date = ["20190330120141", "2008-04-05 16-23-07", "2010.06.07 19:45:00", 
                         "2011-2-8 14-3-7", "2012-3, 9 09:2, 37", "201305-15 0302-09",
@@ -32,8 +34,8 @@ df2 = DataFrame(date = ["20190330120141", "2008-04-05 16-23-07", "2010.06.07 19:
 
 
 ### ymd_hms(), round_date(), floor_date()
-floor_date(): This function rounds a date down to the nearest specified unit (e.g., hour, minute, day, month, year). It takes two arguments - a Date or DateTime object and a string indicating the unit of time to which the date should be floored.
-round_date(): This function rounds a date to the nearest specified unit (e.g., hour, minute, month, year). Like floor_date(), it takes a Date or DateTime object and a string indicating the unit of time for rounding. Note that rounding to the nearest day might not yield accurate results until YMDHMS format is supported in Julia.
+#### floor_date(): This function rounds a date down to the nearest specified unit (e.g., hour, minute, day, month, year). It takes two arguments - a Date or DateTime object and a string indicating the unit of time to which the date should be floored.
+#### round_date(): This function rounds a date to the nearest specified unit (e.g., hour, minute, month, year). Like 
 ```
 @chain df2 begin
     @mutate(date = ymd_hms(date))
@@ -44,7 +46,9 @@ end
 ```
 
 
-### difftime(): This function computes the difference between two DateTime or Date objects. It returns the result in the unit specified by the second argument, which can be "seconds", "minutes", "hours", "days", or "weeks". It returns this value as a float.
+### difftime(): 
+
+#### This function computes the difference between two DateTime or Date objects. It returns the result in the unit specified by the second argument, which can be "seconds", "minutes", "hours", "days", or "weeks". It returns this value as a float.
 ```
 times = DataFrame(
     start_time = [
@@ -84,7 +88,8 @@ times = DataFrame(
     @mutate(second = second(start_time))
 end
 ```
-# hms(): This function parses time strings (e.g., "12:34:56") into a Time format in Julia. It takes a string or an array of strings with the time information and doesn't require additional arguments.
+### hms(): 
+#### This function parses time strings (e.g., "12:34:56") into a Time format in Julia. It takes a string or an array of strings with the time information and doesn't require additional arguments.
 ```
 df3 = DataFrame(
     Time = [
