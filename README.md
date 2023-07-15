@@ -2,6 +2,8 @@ HEAD
 # TidierDates
 The goal of TidierDates is to replicate the consistent and easy way to work with dates of the Lubridate package in R. This package was designed to be compatible with Tidier.jl chains, but can also be used independently.
 
+### This package includes mdy, dmh ymd (all with _hms as well), floor_date, round_date, and timediff
+
 ### mdy(), dmy(), ymd(): 
 #### These functions parse dates represented as strings into a DateTime format in Julia. The input should be a string month-day-year, day-month-year, or year-month-day format respectively. They are relatively robust in their ability to take non-uniform strings of dates 
 ```
