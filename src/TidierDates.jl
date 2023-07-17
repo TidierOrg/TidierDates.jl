@@ -14,7 +14,7 @@ export mdy, mdy_hms, dmy, dmy_hms, ymd, ymd_hms, hms, difftime, floor_date, roun
     ### floor_date() (only supports hour, minute, day, month, year).
     ### round_date() (only supports hour, minute, day (not really viable until YMDHMS exists), month, year).
 
-
+include("datedocstrings.jl")
 #### Create dictionaries to map full and abbreviated month names to numbers
 full_month_to_num = Dict{String, Int}(
     "January" => 1, "February" => 2, "March" => 3, "April" => 4,
