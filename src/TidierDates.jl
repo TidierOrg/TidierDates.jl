@@ -401,4 +401,5 @@ function difftime(time1::Union{DateTime, Missing}, time2::Union{DateTime, Missin
     return result
 end
 
+
 end 
