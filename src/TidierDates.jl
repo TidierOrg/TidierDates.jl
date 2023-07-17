@@ -36,7 +36,6 @@ end
 """
 $docstring_mdy
 """
-
 function mdy(date_string::Union{AbstractString, Missing})
     if ismissing(date_string)
         return missing
@@ -80,9 +79,8 @@ end
 
 
 """
-$docstring_dmy()
+$docstring_dmy
 """
-
 function dmy(date_string::Union{AbstractString, Missing})
     if ismissing(date_string)
         return missing
@@ -141,7 +139,6 @@ end
 """
 $docstring_ymd
 """
-
 function ymd(date_string::Union{AbstractString, Missing})
     if ismissing(date_string)
         return missing
@@ -185,7 +182,6 @@ end
 """
 $docstring_hms
 """
-
 function hms(time_string::Union{String, Missing})
     if ismissing(time_string)
         return missing
@@ -210,7 +206,6 @@ end
 """
 $docstring_floor_date
 """
-
 function floor_date(dt::Union{DateTime, Missing}, unit::String)
     if ismissing(dt)
         return missing
@@ -236,8 +231,6 @@ end
 """
 $docstring_round_date
 """
-
-
 function round_date(dt::Union{DateTime, Date, Time, Missing}, unit::String)
     if ismissing(dt)
         return missing
@@ -279,7 +272,6 @@ end
 """
 $docstring_ymd_hms
 """
-
 function ymd_hms(datetime_string::Union{AbstractString, Missing})
     # If input is missing, return missing
     if ismissing(datetime_string)
@@ -309,8 +301,6 @@ end
 """
 $docstring_dmy_hms
 """
-
-
 function dmy_hms(datetime_string::Union{AbstractString, Missing})
           # If input is missing, return missing
     if ismissing(time1) | ismissing(time2)
@@ -339,11 +329,8 @@ end
 
 
 """
-$docstring_ mdy_hms
+$docstring_mdy_hms
 """
-
-
-
 function mdy_hms(datetime_string::Union{AbstractString, Missing})
     # If input is missing, return missing
     if ismissing(datetime_string)
@@ -374,7 +361,6 @@ end
 """
 $docstring_difftime
 """
-
 function difftime(time1::Union{DateTime, Missing}, time2::Union{DateTime, Missing}, units::AbstractString)
        # If input is missing, return missing
     if ismissing(time1) | ismissing(time2)
