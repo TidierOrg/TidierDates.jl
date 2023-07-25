@@ -4,7 +4,7 @@
 
 `TidierDates.jl` is a 100% Julia implementation of the R lubrdiate package. 
 
-`TidierDates.jl` has one main goal: to implement lubrdiates's straightforward syntax and of ease of use while working with dates for Julia users. While this package was develeoped to work seamelessly with `Tidier.jl` functions and macros, it can also work as a indepentently as a standalone package. 
+`TidierDates.jl` has one main goal: to implement lubrdiates's straightforward syntax and of ease of use while working with dates for Julia users. While this package was develeoped to work seamelessly with `Tidier.jl` functions and macros, it can also work as a indepentently as a standalone package. This package is powered by Dates.jl.
 
 
 ## Installation
@@ -28,11 +28,12 @@ Pkg.add(url = "https://github.com/TidierOrg/TidierDates.jl.git")
 ## Examples
 
 #### `mdy()`, `dmy()`, `ymd()`
-These functions parse dates represented as strings into a DateTime format in Julia. The input should be a string month-day-year, day-month-year, or year-month-day format respectively. They are relatively robust in their ability to take non-uniform strings of dates 
+These functions parse dates represented as strings into a DateTime format in Julia. The input should be a string month-day-year, day-month-year, or year-month-day format respectively. They are relatively robust in their ability to take non-uniform strings of dates. 
 
 ```
 using Tidier
 using TidierDates
+using Dates
 
 df = DataFrame(date = ["today is the 4th July, 2000", 
                         "ayer fue 13th Oct 2001", 
