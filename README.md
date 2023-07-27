@@ -18,19 +18,20 @@ Pkg.add(url = "https://github.com/TidierOrg/TidierDates.jl.git")
 
 ## What functions does TidierDates.jl support?
 
--`ymd()`, `ymd_hms()`
--`dmy()`, `dmy_hms()`
--`mdy()`, `mdy_hms()`
--`floor_date()`
--`round_date()`
--`timediff()`
+- `ymd()`, `ymd_hms()`
+- `dmy()`, `dmy_hms()`
+- `mdy()`, `mdy_hms()`
+- `floor_date()`
+- `round_date()`
+- `timediff()`
 
 ## Examples
 
 #### `mdy()`, `dmy()`, `ymd()`
+
 These functions parse dates represented as strings into a DateTime format in Julia. The input should be a string month-day-year, day-month-year, or year-month-day format respectively. They are relatively robust in their ability to take non-uniform strings of dates. 
 
-```
+```julia
 using Tidier
 using TidierDates
 using Dates
@@ -75,7 +76,7 @@ Similar to the previous group, these functions parse date-time strings in month-
 `floor_date()`: This function rounds a date down to the nearest specified unit (e.g., hour, minute, day, month, year). It takes two arguments - a Date or DateTime object and a string indicating the unit of time to which the date should be floored.
 `round_date()`: This function rounds a date to the nearest specified unit (e.g., hour, minute, month, year). Like 
 
-```
+```julia
 df2 = DataFrame(date = ["20190330120141", "2008-04-05 16-23-07", "2010.06.07 19:45:00", 
                         "2011-2-8 14-3-7", "2012-3, 9 09:2, 37", "201305-15 0302-09",
                         "2013 arbitrary 2 non-decimal 7 chars 13 in between 2 !!! 7", 
@@ -108,7 +109,8 @@ end
 
 #### `difftime()`
 This function computes the difference between two DateTime or Date objects. It returns the result in the unit specified by the second argument, which can be "seconds", "minutes", "hours", "days", or "weeks". It returns this value as a float.
-```
+
+```julia
 times = DataFrame(
     start_time = [
         "06-27-2023 15:20:00",
@@ -154,8 +156,9 @@ times = DataFrame(
   10 │ 06-25-2023 10:45:30  06-24-2023 12:50:15
 ```
 
-#### after a string is converted into a datetime format, Date.jl functions such as hour(), year(), etc can be applied in tidier chains as well.
-```
+#### after a string is converted into a datetime format, Date.jl functions such as hour(), year(), etc can be applied in Tidier chains as well.
+
+```julia
 @chain times begin
     @mutate(start_time = mdy_hms(start_time))
     @mutate(end_time = mdy_hms(end_time))
@@ -165,6 +168,7 @@ times = DataFrame(
     @mutate(second = second(start_time))
 end
 ```
+
 ```
 10×5 DataFrame
  Row │ start_time           end_time             timedifmins     year   second 
@@ -184,7 +188,8 @@ end
 
 #### `hms()` 
 This function parses time strings (e.g., "12:34:56") into a Time format in Julia. It takes a string or an array of strings with the time information and doesn't require additional arguments.
-```
+
+```julia
 df3 = DataFrame(
     Time = [
         "09:00:24",
@@ -220,5 +225,4 @@ end
    8 │ 14:20:00
    9 │ 15:10:45
   10 │ missing  
-
 ```
