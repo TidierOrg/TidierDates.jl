@@ -1,5 +1,7 @@
 module TidierDates
-using Dates
+using Dates, Reexport
+
+@reexport using Dates
 
 include("datedocstrings.jl")
 

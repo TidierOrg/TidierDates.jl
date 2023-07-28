@@ -10,8 +10,6 @@ date_string::Union{AbstractString, Missing}: The date string to be converted to 
 
 # Examples
 ```jldoctest
-julia> using Dates
-
 julia> mdy("12032020")
 2020-12-03
 
@@ -41,8 +39,6 @@ Converts a date string in various formats (like "ddmmyyyy", "day month, year", "
 # Examples
 
 ```jldoctest
-julia> using Dates
-
 julia> dmy("03122020")
 2020-12-03
 
@@ -74,8 +70,6 @@ date_string::Union{AbstractString, Missing}: The date string to be converted to 
 
 # Examples
 ```jldoctest
-julia> using Dates
-
 julia> ymd("20201203")
 2020-12-03
 
@@ -105,9 +99,6 @@ Converts a time string in the format "HH:MM:SS" to a Time object. If the input s
 Returns A Time object representing the input time string.
 # Examples
 ```jldoctest
-julia> using Dates
-
-
 julia> hms("12:34:56")
 12:34:56
 
@@ -132,8 +123,6 @@ The DateTime object rounded down to the nearest specified unit. If the input is 
 
 # Examples
 ```jldoctest
-julia> using Dates
-
 julia> dt = DateTime(2023, 6, 15, 9, 45)
 2023-06-15T09:45:00
 
@@ -163,9 +152,6 @@ The DateTime, Date, or Time object rounded to the nearest specified unit. If the
 
 # Examples
 ```jldoctest
-julia> using Dates
-
-
 julia> dt = DateTime(2023, 6, 15, 9, 45)
 2023-06-15T09:45:00
 
@@ -196,8 +182,6 @@ A DateTime object converted from the string. If the input is missing or the stri
 # Examples
 
 ```jldoctest
-julia> using Dates
-
 julia> ymd_hms("2023-06-15 09:30:00")
 2023-06-15T09:30:00
 
@@ -222,8 +206,6 @@ A DateTime object constructed from the parsed month, day, year, hour, minute, an
 # Examples
 
 ```jldoctest
-julia> using Dates
-
 julia> mdy_hms("06/15/2023 08:30:15")
 2023-06-15T08:30:15
 
@@ -252,8 +234,6 @@ A DateTime object converted from the string. If the input is missing or the stri
 
 # Examples
 ```jldoctest
-julia> using Dates
-
 julia> dmy_hms("15-06-2023 09:30:00")
 2023-06-15T09:30:00
 
@@ -281,8 +261,6 @@ Calculate the difference between two times in the specified units.
 The difference between the two times in the specified units. If either of the inputs is missing, the function returns a missing value.
 # Examples
 ```jldoctest
-julia> using Dates
-
 julia> time1 = DateTime(2023, 6, 15, 9, 30, 0)
 2023-06-15T09:30:00
 

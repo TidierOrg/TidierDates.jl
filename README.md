@@ -32,9 +32,8 @@ Pkg.add(url = "https://github.com/TidierOrg/TidierDates.jl.git")
 These functions parse dates represented as strings into a DateTime format in Julia. The input should be a string month-day-year, day-month-year, or year-month-day format respectively. They are relatively robust in their ability to take non-uniform strings of dates. 
 
 ```julia
-using Tidier
+using TidierData
 using TidierDates
-using Dates
 
 df = DataFrame(date = ["today is the 4th July, 2000", 
                         "ayer fue 13th Oct 2001", 
