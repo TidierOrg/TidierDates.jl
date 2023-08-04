@@ -1,5 +1,7 @@
 # TidierDates.jl
 
+<img src="/docs/src/assets/TidierDates_logo.png" align="right" style="padding-left:10px;" width="150"/>
+
 ## What is TidierDates.jl
 
 `TidierDates.jl` is a 100% Julia implementation of the R lubrdiate package. 
