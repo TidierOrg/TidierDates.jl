@@ -4,9 +4,9 @@
 
 ## What is TidierDates.jl
 
-`TidierDates.jl` is a 100% Julia implementation of the R lubrdiate package. 
+`TidierDates.jl` is a 100% Julia implementation of the R lubridate package. 
 
-`TidierDates.jl` has one main goal: to implement lubrdiates's straightforward syntax and of ease of use while working with dates for Julia users. While this package was develeoped to work seamelessly with `Tidier.jl` functions and macros, it can also work as a indepentently as a standalone package. This package is powered by Dates.jl.
+`TidierDates.jl` has one main goal: to implement lubridate's straightforward syntax and of ease of use while working with dates for Julia users. While this package was developed to work seamlessly with `Tidier.jl` functions and macros, it can also work as a independently as a standalone package. This package is powered by Dates.jl.
 
 
 ## Installation

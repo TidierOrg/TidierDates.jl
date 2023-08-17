@@ -41,7 +41,6 @@ end
 """
 $docstring_mdy
 """
-
 function mdy(date_string::Union{AbstractString, Missing})
     if ismissing(date_string)
         return missing
@@ -87,7 +86,6 @@ end
 """
 $docstring_dmy
 """
-
 function dmy(date_string::Union{AbstractString, Missing})
     if ismissing(date_string)
         return missing
@@ -104,7 +102,7 @@ function dmy(date_string::Union{AbstractString, Missing})
 
     m = match(r"(\w+)\s*(\d{1,2})(st|nd|rd|th)?,?\s*(\d{4})", date_string)
     if m !== nothing
-        month_str, day_str, _, year_str = m.captures
+        day_str, _, month_str, year_str = m.captures
         month_str = lowercase(month_str)
         month_str = string(uppercase(month_str[1]), month_str[2:end])
         month = month_to_num(month_str)
@@ -146,7 +144,6 @@ end
 """
 $docstring_ymd
 """
-
 function ymd(date_string::Union{AbstractString, Missing})
     if ismissing(date_string)
         return missing
@@ -190,7 +187,6 @@ end
 """
 $docstring_hms
 """
-
 function hms(time_string::Union{String, Missing})
     if ismissing(time_string)
         return missing
@@ -215,7 +211,6 @@ end
 """
 $docstring_floor_date
 """
-
 function floor_date(dt::Union{DateTime, Missing}, unit::String)
     if ismissing(dt)
         return missing
@@ -284,7 +279,6 @@ end
 """
 $docstring_ymd_hms
 """
-
 function ymd_hms(datetime_string::Union{AbstractString, Missing})
     # If input is missing, return missing
     if ismissing(datetime_string)
@@ -314,11 +308,9 @@ end
 """
 $docstring_dmy_hms
 """
-
-
 function dmy_hms(datetime_string::Union{AbstractString, Missing})
           # If input is missing, return missing
-    if ismissing(time1) | ismissing(time2)
+    if ismissing(datetime_string)
         return missing
     end
    
@@ -346,9 +338,6 @@ end
 """
 $docstring_mdy_hms
 """
-
-
-
 function mdy_hms(datetime_string::Union{AbstractString, Missing})
     # If input is missing, return missing
     if ismissing(datetime_string)
