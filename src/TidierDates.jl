@@ -118,7 +118,7 @@ function dmy(date_string::Union{AbstractString, Missing})
 
     m = match(r"(\d{1,2})[/-](\d{1,2})[/-](\d{4})", date_string)
     if m !== nothing
-        month_str, day_str, year_str = m.captures
+        day_str, month_str, year_str = m.captures
         month = parse(Int, month_str)
         day = parse(Int, day_str)
         year = parse(Int, year_str)
