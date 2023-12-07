@@ -1,5 +1,7 @@
 # TidierDates.jl
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/TidierOrg/TidierDates.jl/blob/main/LICENSE)
+[![Docs: Latest](https://img.shields.io/badge/Docs-Latest-blue.svg)](https://tidierorg.github.io/TidierDates.jl/dev)
+[![Build Status](https://github.com/TidierOrg/TidierStrings.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/TidierOrg/TidierDates.jl/actions/workflows/CI.yml?query=branch%3Amain)
 <img src="/docs/src/assets/TidierDates_logo.png" align="right" style="padding-left:10px;" width="150"/>
 
 ## What is TidierDates.jl
