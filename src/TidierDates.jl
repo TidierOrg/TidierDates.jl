@@ -399,7 +399,7 @@ function now(tzone::AbstractString="")::ZonedDateTime
     if tzone == ""
         return ZonedDateTime(now())
     else
-        tz = timezone(tzone)
+        tz::TimeZone = timezone(tzone)
         return ZonedDateTime(now(tz), tz)
     end
 end
@@ -408,7 +408,7 @@ function today(tzone::AbstractString="")::Date
     if tzone == ""
         return Date(now())
     else
-        tz = timezone(tzone)
+        tz::TimeZone = timezone(tzone)
         return Date(ZonedDateTime(now(tz), tz))
     end
 end
