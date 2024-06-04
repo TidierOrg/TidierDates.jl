@@ -28,6 +28,10 @@ Pkg.add(url = "https://github.com/TidierOrg/TidierDates.jl.git")
 - `floor_date()`
 - `round_date()`
 - `timediff()`
+- `now()`, `today()`
+- `am()`, `pm()`
+- `leap_year()`
+- `days_in_month()`
 
 ## Examples
 
