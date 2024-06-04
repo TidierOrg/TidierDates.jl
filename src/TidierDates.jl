@@ -395,7 +395,7 @@ function difftime(time1::Union{DateTime, Missing}, time2::Union{DateTime, Missin
     return result
 end
 
-function now(tzone::AbstractString="")
+function now(tzone::AbstractString="")::ZonedDateTime
     if tzone == ""
         return ZonedDateTime(now())
     else
@@ -404,7 +404,7 @@ function now(tzone::AbstractString="")
     end
 end
 
-function today(tzone::AbstractString="")
+function today(tzone::AbstractString="")::Date
     if tzone == ""
         return Date(now())
     else
@@ -413,11 +413,11 @@ function today(tzone::AbstractString="")
     end
 end
 
-function am(x::DateTime)
+function am(x::DateTime)::Bool
     return hour(x) < 12
 end
 
-function pm(x::DateTime)
+function pm(x::DateTime)::Bool
     return hour(x) >= 12
 end
 
@@ -425,11 +425,11 @@ function leap_year(year::Int)::Bool
     return isleapyear(year)
 end
 
-function leap_year(date::Date)
+function leap_year(date::Date)::Bool
     return isleapyear(year(date))
 end
 
-function days_in_month(x::Date)
+function days_in_month(x::Date)::Int
     month_days::Vector{Int} = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
     y::Int = year(x)
