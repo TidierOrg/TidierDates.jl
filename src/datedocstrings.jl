@@ -314,6 +314,20 @@ const docstring_am =
 
 Checks if the time is in the morning.
 
+# Arguments
+`x`: A DateTime object
+
+# Returns
+A boolean indicating whether the time is in the morning.
+
+# Examples
+```jldoctest
+julia> am(DateTime(2023, 6, 15, 9, 30, 0))
+true
+
+julia> am(DateTime(2023, 6, 15, 8, 30, 0))
+false
+```
 """
 
 const docstring_pm =
@@ -322,6 +336,20 @@ const docstring_pm =
 
 Checks if the time is in the afternoon.
 
+# Arguments
+`x`: A DateTime object
+
+# Returns
+A boolean indicating whether the time is in the afternoon.
+
+# Examples
+```jldoctest
+julia> pm(DateTime(2023, 6, 15, 9, 30, 0))
+false
+
+julia> pm(DateTime(2023, 6, 15, 8, 30, 0))
+true
+```
 """
 
 const docstring_leap_year =
@@ -331,6 +359,21 @@ const docstring_leap_year =
 
 Checks if the year is a leap year.
 
+# Arguments
+`date`: A Date object or an integer representing the year.
+
+# Returns
+A boolean indicating whether the year is a leap year.
+
+# Examples
+```jldoctest
+julia> leap_year(Date(2023, 6, 15))
+true
+
+julia> leap_year(2020)
+false
+```
+
 """
 
 const docstring_days_in_month =
@@ -338,5 +381,26 @@ const docstring_days_in_month =
     days_in_month(x::Date)::Int
 
 Returns the number of days in the month.
+
+# Arguments
+`x`: A Date object
+
+# Returns
+An integer representing the number of days in the month.
+
+# Examples
+```jldoctest
+julia> days_in_month(Date(2023, 6, 15))
+30
+
+julia> days_in_month(Date(2020, 2, 29))
+29
+
+julia> days_in_month(Date(2020, 2, 30))
+28
+
+julia> days_in_month(Date(2020, 2, 31))
+28
+```
 
 """
