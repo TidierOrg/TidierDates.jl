@@ -14,3 +14,7 @@ In addition, this package includes:
 - `floor_date()`
 - `round_date()`
 - `timediff()`
+- `now()`, `today()`
+- `am()`, `pm()`
+- `leap_year()`
+- `days_in_month()`
