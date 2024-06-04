@@ -1,12 +1,12 @@
 module TidierDates
-using Dates, Reexport
+
+using Dates, Reexport, TimeZones
 
 @reexport using Dates
 
 include("datedocstrings.jl")
 
-
-export mdy, mdy_hms, dmy, dmy_hms, ymd, ymd_hms, hms, difftime, floor_date, round_date
+export mdy, mdy_hms, dmy, dmy_hms, ymd, ymd_hms, hms, difftime, floor_date, round_date, now, today, am, pm, leap_year, days_in_month
 ### Functions below include:
     ### mdy()
     ### mdy_hms()  
@@ -393,6 +393,53 @@ function difftime(time1::Union{DateTime, Missing}, time2::Union{DateTime, Missin
     end
 
     return result
+end
+
+function now(tzone::AbstractString="")
+    if tzone == ""
+        return ZonedDateTime(now())
+    else
+        tz = timezone(tzone)
+        return ZonedDateTime(now(tz), tz)
+    end
+end
+
+function today(tzone::AbstractString="")
+    if tzone == ""
+        return Date(now())
+    else
+        tz = timezone(tzone)
+        return Date(ZonedDateTime(now(tz), tz))
+    end
+end
+
+function am(x::DateTime)
+    return hour(x) < 12
+end
+
+function pm(x::DateTime)
+    return hour(x) >= 12
+end
+
+function leap_year(year::Int)::Bool
+    return isleapyear(year)
+end
+
+function leap_year(date::Date)
+    return isleapyear(year(date))
+end
+
+function days_in_month(x::Date)
+    month_days::Vector{Int} = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+    y::Int = year(x)
+    m::Int = month(x)
+
+    if m == 2 && isleapyear(y)
+        return 29
+    else
+        return month_days[m]
+    end
 end
 
 end 

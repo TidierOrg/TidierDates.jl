@@ -1,4 +1,3 @@
-
 const docstring_mdy = 
 """
     mdy(date_string::Union{AbstractString, Missing})
