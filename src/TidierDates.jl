@@ -422,42 +422,53 @@ end
 """
 $docstring_am
 """
-function am(x::DateTime)::Bool
-    return hour(x) < 12
+function am(dt::DateTime)::Bool
+    if ismissing(dt)
+        return missing
+    end
+
+    return hour(dt) < 12
 end
 
 """
 $docstring_pm
 """
-function pm(x::DateTime)::Bool
-    return hour(x) >= 12
+function pm(dt::DateTime)::Bool
+    if ismissing(dt)
+        return missing
+    end
+
+    return hour(dt) >= 12
 end
 
 """
 $docstring_leap_year
 """
 function leap_year(date::Int)::Bool
+    if ismissing(date)
+        return missing
+    end
+
     return isleapyear(date)
 end
 
 function leap_year(date::Date)::Bool
+    if ismissing(date)
+        return missing
+    end
+
     return isleapyear(year(date))
 end
 
 """
 $docstring_days_in_month
 """
-function days_in_month(x::Date)::Int
-    month_days::Vector{Int} = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-
-    y::Int = year(x)
-    m::Int = month(x)
-
-    if m == 2 && isleapyear(y)
-        return 29
-    else
-        return month_days[m]
+function days_in_month(date::Date)::Int
+    if ismissing(date)
+        return missing
     end
+
+    return daysinmonth(date)
 end
 
-end 
+end

@@ -323,10 +323,10 @@ A boolean indicating whether the time is in the morning.
 # Examples
 ```jldoctest
 julia> am(DateTime(2023, 6, 15, 9, 30, 0))
-true
+false
 
 julia> am(DateTime(2023, 6, 15, 8, 30, 0))
-false
+true
 ```
 """
 
@@ -345,10 +345,10 @@ A boolean indicating whether the time is in the afternoon.
 # Examples
 ```jldoctest
 julia> pm(DateTime(2023, 6, 15, 9, 30, 0))
-false
+true
 
 julia> pm(DateTime(2023, 6, 15, 8, 30, 0))
-true
+false
 ```
 """
 
@@ -368,10 +368,10 @@ A boolean indicating whether the year is a leap year.
 # Examples
 ```jldoctest
 julia> leap_year(Date(2023, 6, 15))
-true
+false
 
 julia> leap_year(2020)
-false
+true
 ```
 
 """
