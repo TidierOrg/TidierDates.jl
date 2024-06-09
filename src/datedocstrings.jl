@@ -310,12 +310,12 @@ A ZonedDateTime object representing the current date in the specified time zone.
 
 const docstring_am =
 """
-    am(x::DateTime)::Bool
+    am(dt::DateTime)::Bool
 
 Checks if the time is in the morning.
 
 # Arguments
-`x`: A DateTime object
+`dt`: A DateTime object
 
 # Returns
 A boolean indicating whether the time is in the morning.
@@ -332,12 +332,12 @@ true
 
 const docstring_pm =
 """
-    pm(x::DateTime)::Bool
+    pm(dt::DateTime)::Bool
 
 Checks if the time is in the afternoon.
 
 # Arguments
-`x`: A DateTime object
+`dt`: A DateTime object
 
 # Returns
 A boolean indicating whether the time is in the afternoon.
@@ -378,12 +378,12 @@ true
 
 const docstring_days_in_month =
 """
-    days_in_month(x::Date)::Int
+    days_in_month(date::Date)::Int
 
 Returns the number of days in the month.
 
 # Arguments
-`x`: A Date object
+`date`: A Date object
 
 # Returns
 An integer representing the number of days in the month.
