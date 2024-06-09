@@ -396,11 +396,11 @@ julia> days_in_month(Date(2023, 6, 15))
 julia> days_in_month(Date(2020, 2, 29))
 29
 
-julia> days_in_month(Date(2020, 2, 30))
+julia> days_in_month(Date(2019, 2, 28))
 28
 
-julia> days_in_month(Date(2020, 2, 31))
-28
+julia> days_in_month(Date(2016, 2, 3))
+29
 ```
 
 """
