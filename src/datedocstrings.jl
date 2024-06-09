@@ -1,4 +1,3 @@
-
 const docstring_mdy = 
 """
     mdy(date_string::Union{AbstractString, Missing})
@@ -248,8 +247,6 @@ missing
 ```
 """
 
-
-
 const docstring_difftime = 
 """
 difftime(time1::Union{DateTime, Missing}, time2::Union{DateTime, Missing}, units::AbstractString)
@@ -283,3 +280,127 @@ missing
 ```
 """
 
+const docstring_now =
+"""
+    now(tzone::AbstractString="")::ZonedDateTime
+
+Get the current date and time in the specified time zone.
+
+# Arguments
+`tzone`: A string specifying the time zone to use. If not provided, the default time zone is used.
+
+# Returns
+A ZonedDateTime object representing the current date and time in the specified time zone.
+
+"""
+
+const docstring_today =
+"""
+    today(tzone::AbstractString="")::ZonedDateTime
+
+Get the current date in the specified time zone.
+
+# Arguments
+`tzone`: A string specifying the time zone to use. If not provided, the default time zone is used.
+
+# Returns
+A ZonedDateTime object representing the current date in the specified time zone.
+
+"""
+
+const docstring_am =
+"""
+    am(dt::DateTime)::Bool
+
+Checks if the time is in the morning.
+
+# Arguments
+`dt`: A DateTime object
+
+# Returns
+A boolean indicating whether the time is in the morning.
+
+# Examples
+```jldoctest
+julia> am(DateTime(2023, 6, 15, 9, 30, 0))
+true
+
+julia> am(DateTime(2023, 6, 15, 8, 30, 0))
+true
+```
+"""
+
+const docstring_pm =
+"""
+    pm(dt::DateTime)::Bool
+
+Checks if the time is in the afternoon.
+
+# Arguments
+`dt`: A DateTime object
+
+# Returns
+A boolean indicating whether the time is in the afternoon.
+
+# Examples
+```jldoctest
+julia> pm(DateTime(2023, 6, 15, 9, 30, 0))
+false
+
+julia> pm(DateTime(2023, 6, 15, 8, 30, 0))
+false
+```
+"""
+
+const docstring_leap_year =
+"""
+    leap_year(date::Date)::Bool
+    leap_year(date::Int)::Bool
+
+Checks if the year is a leap year.
+
+# Arguments
+`date`: A Date object or an integer representing the year.
+
+# Returns
+A boolean indicating whether the year is a leap year.
+
+# Examples
+```jldoctest
+julia> leap_year(Date(2023, 6, 15))
+false
+
+julia> leap_year(2020)
+true
+```
+
+"""
+
+const docstring_days_in_month =
+"""
+    days_in_month(date::Date)::Int
+
+Returns the number of days in the month.
+
+# Arguments
+`date`: A Date object
+
+# Returns
+An integer representing the number of days in the month.
+
+# Examples
+```jldoctest
+julia> days_in_month(Date(2023, 6, 15))
+30
+
+julia> days_in_month(Date(2020, 2, 29))
+29
+
+julia> days_in_month(Date(2019, 2, 28))
+28
+
+julia> days_in_month(Date(2016, 2, 3))
+29
+```
+
+"""

@@ -1,12 +1,12 @@
 module TidierDates
-using Dates, Reexport
+
+using Dates, Reexport, TimeZones
 
 @reexport using Dates
 
 include("datedocstrings.jl")
 
-
-export mdy, mdy_hms, dmy, dmy_hms, ymd, ymd_hms, hms, difftime, floor_date, round_date
+export mdy, mdy_hms, dmy, dmy_hms, ymd, ymd_hms, hms, difftime, floor_date, round_date, now, today, am, pm, leap_year, days_in_month
 ### Functions below include:
     ### mdy()
     ### mdy_hms()  
@@ -395,4 +395,80 @@ function difftime(time1::Union{DateTime, Missing}, time2::Union{DateTime, Missin
     return result
 end
 
-end 
+"""
+$docstring_now
+"""
+function now(tzone::AbstractString="")::ZonedDateTime
+    if tzone == ""
+        return ZonedDateTime(now())
+    else
+        tz::TimeZone = timezone(tzone)
+        return ZonedDateTime(now(tz), tz)
+    end
+end
+
+"""
+$docstring_today
+"""
+function today(tzone::AbstractString="")::ZonedDateTime
+    if tzone == ""
+        return Date(now())
+    else
+        tz::TimeZone = timezone(tzone)
+        return Date(ZonedDateTime(now(tz), tz))
+    end
+end
+
+"""
+$docstring_am
+"""
+function am(dt::DateTime)::Bool
+    if ismissing(dt)
+        return missing
+    end
+
+    return hour(dt) < 12
+end
+
+"""
+$docstring_pm
+"""
+function pm(dt::DateTime)::Bool
+    if ismissing(dt)
+        return missing
+    end
+
+    return hour(dt) >= 12
+end
+
+"""
+$docstring_leap_year
+"""
+function leap_year(date::Int)::Bool
+    if ismissing(date)
+        return missing
+    end
+
+    return isleapyear(date)
+end
+
+function leap_year(date::Date)::Bool
+    if ismissing(date)
+        return missing
+    end
+
+    return isleapyear(year(date))
+end
+
+"""
+$docstring_days_in_month
+"""
+function days_in_month(dt::TimeType)::Int
+    if ismissing(dt)
+        return missing
+    end
+
+    return daysinmonth(dt)
+end
+
+end
