@@ -326,7 +326,7 @@ julia> am(DateTime(2023, 6, 15, 9, 30, 0))
 false
 
 julia> am(DateTime(2023, 6, 15, 8, 30, 0))
-true
+false
 ```
 """
 
@@ -348,7 +348,7 @@ julia> pm(DateTime(2023, 6, 15, 9, 30, 0))
 true
 
 julia> pm(DateTime(2023, 6, 15, 8, 30, 0))
-false
+true
 ```
 """
 
