@@ -463,12 +463,12 @@ end
 """
 $docstring_days_in_month
 """
-function days_in_month(date::Date)::Int
-    if ismissing(date)
+function days_in_month(dt::TimeType)::Int
+    if ismissing(dt)
         return missing
     end
 
-    return daysinmonth(date)
+    return daysinmonth(dt)
 end
 
 end
