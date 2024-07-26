@@ -9,12 +9,12 @@ include("datedocstrings.jl")
 export mdy, mdy_hms, dmy, dmy_hms, ymd, ymd_hms, hms, difftime, floor_date, round_date, now, today, am, pm, leap_year, days_in_month
 ### Functions below include:
     ### mdy()
-    ### mdy_hms()  
+    ### mdy_hms()
     ### dmy()
     ### dmy_hms()
     ### ymd()
-    ### ymd_hms() 
-    ### hms() 
+    ### ymd_hms()
+    ### hms()
     ### difftime() (returns answer in seconds, minutes, hours or days)
     ### floor_date() (only supports hour, minute, day, month, year).
     ### round_date() (only supports hour, minute, day (not really viable until YMDHMS exists), month, year).
@@ -68,7 +68,7 @@ function mdy(date_string::Union{AbstractString, Missing})
         year = parse(Int, year_str)
         return Date(year, month, day)
     end
-    
+
     # Add new regex match for "m/d/y" and "m-d-y" formats
     m = match(r"(\d{1,2})[/-](\d{1,2})[/-](\d{4})", date_string)
     if m !== nothing
@@ -136,7 +136,7 @@ function dmy(date_string::Union{AbstractString, Missing})
         year = parse(Int, year_str)
         return Date(year, month, day)
     end
-    
+
     return nothing
 end
 
@@ -157,7 +157,7 @@ function ymd(date_string::Union{AbstractString, Missing})
         day = parse(Int, day_str)
         return Date(year, month, day)
     end
-    
+
     # Try "yyyy/mm/dd" and "yyyy-mm-dd" formats
     m = match(r"(\d{4})[/-](\d{1,2})[/-](\d{1,2})", date_string)
     if m !== nothing
@@ -179,7 +179,7 @@ function ymd(date_string::Union{AbstractString, Missing})
         day = parse(Int, day_str)
         return Date(year, month, day)
     end
-    
+
     return nothing
 end
 
@@ -220,6 +220,9 @@ function floor_date(dt::Union{DateTime, Missing}, unit::String)
         return DateTime(year(dt))
     elseif unit == "month"
         return DateTime(year(dt), month(dt))
+    elseif unit == "week"
+        start_of_week = firstdayofweek(dt) - Day(1)
+        return DateTime(year(start_of_week), month(start_of_week), day(start_of_week))
     elseif unit == "day"
         return DateTime(year(dt), month(dt), day(dt))
     elseif unit == "hour"
@@ -227,7 +230,7 @@ function floor_date(dt::Union{DateTime, Missing}, unit::String)
     elseif unit == "minute"
         return DateTime(year(dt), month(dt), day(dt), hour(dt), minute(dt))
     else
-        throw(ArgumentError("Unit must be one of 'year', 'month', 'day', 'hour', or 'minute'."))
+        throw(ArgumentError("Unit must be one of 'year', 'month', 'week', 'day', 'hour', or 'minute'."))
     end
 end
 
@@ -242,7 +245,7 @@ function round_date(dt::Union{DateTime, Date, Time, Missing}, unit::String)
     if ismissing(dt)
         return missing
     end
-    
+
     if dt isa DateTime || dt isa Date
         if unit == "year"
             return month(dt) > 6 || (month(dt) == 6 && day(dt) > 15) ? Date(year(dt) + 1) : Date(year(dt))
@@ -286,7 +289,7 @@ function ymd_hms(datetime_string::Union{AbstractString, Missing})
     end
     # Extract year, month, day, hour, minute, and second using a flexible regular expression
     m = match(r"(\d{4}).*?(\d{1,2}).*?(\d{1,2}).*?(\d{1,2}).*?(\d{1,2}).*?(\d{1,2})", datetime_string)
-    
+
     if m !== nothing
         year_str, month_str, day_str, hour_str, minute_str, second_str = m.captures
         year = parse(Int, year_str)
@@ -313,7 +316,7 @@ function dmy_hms(datetime_string::Union{AbstractString, Missing})
     if ismissing(datetime_string)
         return missing
     end
-   
+
     # Extract day, month, year, hour, minute, and second using a flexible regular expression
     m = match(r"(\d{1,2}).*?(\d{1,2}).*?(\d{4}).*?(\d{1,2}).*?(\d{1,2}).*?(\d{1,2})", datetime_string)
 
@@ -346,7 +349,7 @@ function mdy_hms(datetime_string::Union{AbstractString, Missing})
 
     # Extract year, month, day, hour, minute, and second using a flexible regular expression
     m = match(r"(\d{1,2}).*?(\d{1,2}).*?(\d{4}).*?(\d{1,2}).*?(\d{1,2}).*?(\d{1,2})", datetime_string)
-    
+
     if m !== nothing
         month_str, day_str, year_str, hour_str, minute_str, second_str = m.captures
         year = parse(Int, year_str)
@@ -374,7 +377,7 @@ function difftime(time1::Union{DateTime, Missing}, time2::Union{DateTime, Missin
     if ismissing(time1) | ismissing(time2)
         return missing
     end
-   
+
     # Calculate the difference
     diff = time1 - time2
 
