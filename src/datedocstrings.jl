@@ -123,7 +123,7 @@ Round down a DateTime object to the nearest specified unit.
 # Returns
 The DateTime object rounded down to the nearest specified unit. If the input is missing, the function returns a missing value.
 
-The "week" unit will return Sunday as the first day of the week.
+When using the "week" unit, Sunday is considered the first day of the week.
 
 # Examples
 ```jldoctest
