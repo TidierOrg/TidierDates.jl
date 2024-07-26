@@ -220,6 +220,9 @@ function floor_date(dt::Union{DateTime, Missing}, unit::String)
         return DateTime(year(dt))
     elseif unit == "month"
         return DateTime(year(dt), month(dt))
+    elseif unit == "week"
+        start_of_week = firstdayofweek(dt) - Day(1)
+        return DateTime(year(start_of_week), month(start_of_week), day(start_of_week))
     elseif unit == "day"
         return DateTime(year(dt), month(dt), day(dt))
     elseif unit == "hour"
@@ -228,6 +231,7 @@ function floor_date(dt::Union{DateTime, Missing}, unit::String)
         return DateTime(year(dt), month(dt), day(dt), hour(dt), minute(dt))
     else
         throw(ArgumentError("Unit must be one of 'year', 'month', 'day', 'hour', or 'minute'."))
+        throw(ArgumentError("Unit must be one of 'year', 'month', 'week', 'day', 'hour', or 'minute'."))
     end
 end
 
