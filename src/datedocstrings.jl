@@ -1,4 +1,4 @@
-const docstring_mdy = 
+const docstring_mdy =
 """
     mdy(date_string::Union{AbstractString, Missing})
 
@@ -27,7 +27,7 @@ missing
 ```
 """
 
-const docstring_dmy = 
+const docstring_dmy =
 """
     dmy(date_string::Union{AbstractString, Missing})
 
@@ -61,7 +61,7 @@ missing
 ```
 """
 
-const docstring_ymd = 
+const docstring_ymd =
 """
     ymd(date_string::Union{AbstractString, Missing})
 
@@ -90,7 +90,7 @@ missing
 """
 
 
-const docstring_hms = 
+const docstring_hms =
 """
     hms(time_string::Union{String, Missing})
 
@@ -110,7 +110,7 @@ missing
 ```
 """
 
-const docstring_floor_date = 
+const docstring_floor_date =
 """
     floor_date(dt::Union{DateTime, Missing}, unit::String)
 
@@ -118,7 +118,6 @@ Round down a DateTime object to the nearest specified unit.
 
 # Arguments
 `dt`: A DateTime object (can contain missing values in a DataFrame).
-`unit`: A string specifying the units to use for rounding down. The units can be one of the following: "year", "month", "day", "hour", "minute".
 `unit`: A string specifying the units to use for rounding down. The units can be one of the following: "year", "month", "week", "day", "hour", "minute".
 
 # Returns
@@ -145,7 +144,7 @@ missing
 ```
 """
 
-const docstring_round_date = 
+const docstring_round_date =
 """
     round_date(dt::Union{DateTime, Date, Time, Missing}, unit::String)
 
@@ -174,7 +173,7 @@ missing
 ```
 """
 
-const docstring_ymd_hms = 
+const docstring_ymd_hms =
 """
     ymd_hms(datetime_string::Union{AbstractString, Missing})
 
@@ -200,7 +199,7 @@ missing
 ```
 """
 
-const docstring_mdy_hms = 
+const docstring_mdy_hms =
 """
     mdy_hms(datetime_string::Union{AbstractString, Missing})
 
@@ -253,7 +252,7 @@ missing
 ```
 """
 
-const docstring_difftime = 
+const docstring_difftime =
 """
 difftime(time1::Union{DateTime, Missing}, time2::Union{DateTime, Missing}, units::AbstractString)
 
