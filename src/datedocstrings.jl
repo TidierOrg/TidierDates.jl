@@ -119,9 +119,12 @@ Round down a DateTime object to the nearest specified unit.
 # Arguments
 `dt`: A DateTime object (can contain missing values in a DataFrame).
 `unit`: A string specifying the units to use for rounding down. The units can be one of the following: "year", "month", "day", "hour", "minute".
+`unit`: A string specifying the units to use for rounding down. The units can be one of the following: "year", "month", "week", "day", "hour", "minute".
 
 # Returns
 The DateTime object rounded down to the nearest specified unit. If the input is missing, the function returns a missing value.
+
+The "week" unit will return Sunday as the first day of the week.
 
 # Examples
 ```jldoctest
@@ -133,6 +136,9 @@ julia> floor_date(dt, "hour")
 
 julia> floor_date(dt, "day")
 2023-06-15T00:00:00
+
+julia> floor_date(dt, "week")
+2023-06-11T00:00:00
 
 julia> floor_date(missing, "day")
 missing
