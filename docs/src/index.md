@@ -8,7 +8,7 @@ This package re-exports `Dates.jl`.
 
 In addition, this package includes:
 
-- `ymd()`, `ymd_hms()`
+- `ymd()`, `ymd_hms()`, `ymd_h()`, `ymd_hm()`
 - `dmy()`, `dmy_hms()`
 - `mdy()`, `mdy_hms()`
 - `floor_date()`

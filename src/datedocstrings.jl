@@ -430,5 +430,163 @@ julia> days_in_month(Date(2019, 2, 28))
 julia> days_in_month(Date(2016, 2, 3))
 29
 ```
+"""
 
+
+const docstring_ymd_h =
+"""
+    ymd_h(datetime_string::Union{AbstractString, Missing})::DateTime
+
+Converts a date and time string in the format "YYYY-MM-DD HH" to a DateTime object. 
+
+# Arguments
+`datetime_string`: A string containing a datetime representation (can contain missing values in a DataFrame).
+
+# Returns
+A DateTime object constructed from the parsed year, month, day, and hour values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the datetime information cannot be parsed from the string.
+
+# Examples
+```jldoctest
+julia> ymd_h("2023-06-15 09hr")
+2023-06-15T09:00:00
+
+julia> ymd_h("2023-06-15 09hr p")
+2023-06-15T21:00:00
+
+julia> ymd_h(missing)
+missing
+```
+"""
+
+const docstring_ymd_hm =
+"""
+    ymd_hm(datetime_string::Union{AbstractString, Missing})::DateTime
+
+Converts a date and time string in the format "YYYY-MM-DD HH:MM" to a DateTime object.
+
+# Arguments
+`datetime_string`: A string containing a datetime representation (can contain missing values in a DataFrame).
+
+# Returns
+A DateTime object constructed from the parsed year, month, day, hour, and minute values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the datetime information cannot be parsed from the string.
+
+# Examples
+```jldoctest
+julia> ymd_hm("2023-06-15 09:30")
+2023-06-15T09:30:00
+
+julia> ymd_hm("2023-06-15 09:30p")
+2023-06-15T21:30:00
+
+julia> ymd_hm(missing)
+missing
+```
+""" 
+
+const docstring_dmy_h =
+"""
+    dmy_h(datetime_string::Union{AbstractString, Missing})::DateTime
+
+Converts a date and time string in the format "DD-MM-YYYY HH" to a DateTime object.
+
+# Arguments
+`datetime_string`: A string containing a datetime representation (can contain missing values in a DataFrame).
+
+# Returns
+A DateTime object constructed from the parsed day, month, year, and hour values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the datetime information cannot be parsed from the string.  
+
+# Examples
+```jldoctest
+julia> dmy_h("01/01/2020 4PM")
+2020-01-01T16:00:00
+
+julia> dmy_h("01-01-2020 16hrs")
+2020-01-01T16:00:00
+
+julia> dmy_h(missing)
+missing
+```
+""" 
+
+const docstring_dmy_hm =
+"""
+    dmy_hm(datetime_string::Union{AbstractString, Missing})::DateTime
+
+Converts a date and time string in the format "DD-MM-YYYY HH:MM" to a DateTime object.
+
+# Arguments
+`datetime_string`: A string containing a datetime representation (can contain missing values in a DataFrame).
+
+# Returns
+A DateTime object constructed from the parsed day, month, year, hour, and minute values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the datetime information cannot be parsed from the string.
+
+# Examples
+```jldoctest
+julia> dmy_hm("01/01/2020 4:30PM")
+2020-01-01T16:30:00
+
+julia> dmy_hm("01/01/2020 4:30 a")
+2020-01-01T04:30:00
+
+julia> dmy_hm(missing)
+missing
+```
+""" 
+
+const docstring_mdy_h =
+"""
+    mdy_h(datetime_string::Union{AbstractString, Missing})::DateTime    
+
+Converts a date and time string in the format "MM-DD-YYYY HH" to a DateTime object.
+
+# Arguments
+`datetime_string`: A string containing a datetime representation (can contain missing values in a DataFrame).
+
+# Returns
+A DateTime object constructed from the parsed month, day, year, and hour values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the datetime information cannot be parsed from the string.
+
+# Examples
+```jldoctest
+julia> mdy_h("06-15-2023 09hr")
+2023-06-15T09:00:00
+
+julia> mdy_h("06-15-2023 09hr p")
+2023-06-15T21:00:00
+
+julia> mdy_h("jan 3 2023 09hr p")
+2023-01-03T21:00:00
+
+
+julia> mdy_h(missing)
+missing
+```
+"""
+
+const docstring_mdy_hm =
+"""
+    mdy_hm(datetime_string::Union{AbstractString, Missing})::DateTime
+
+Converts a date and time string in the format "MM-DD-YYYY HH:MM" to a DateTime object.
+
+# Arguments
+`datetime_string`: A string containing a datetime representation (can contain missing values in a DataFrame).
+
+# Returns
+A DateTime object constructed from the parsed month, day, year, and hour values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the datetime information cannot be parsed from the string.
+
+# Examples
+```jldoctest
+julia> mdy_hm("06-15-2023 09:03 P")
+2023-06-15T21:03:00
+
+julia> mdy_hm("06-15-2023 09:03 p")
+
+julia> mdy_hm("06-15-2023 09:03 ")
+2023-06-15T09:03:00
+
+julia> mdy_hm("june 15 2023 09:03 p")
+2023-06-15T21:03:00
+
+julia> mdy_hm(missing)
+missing
 """

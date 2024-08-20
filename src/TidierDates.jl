@@ -6,8 +6,9 @@ using Dates, Reexport, TimeZones
 
 include("datedocstrings.jl")
 
-export mdy, mdy_hms, dmy, dmy_hms, ymd, ymd_hms, hms, difftime, floor_date, round_date, now, today, am, pm, leap_year, days_in_month
-### Functions below include:
+export mdy, mdy_hms, dmy, dmy_hms, ymd, ymd_hms, ymd_h, ymd_hm, 
+hms, difftime, floor_date, round_date, now, today, am, pm, leap_year, 
+days_in_month, dmy_h, dmy_hm, mdy_h, mdy_hm
 
 #### Create dictionaries to map full and abbreviated month names to numbers
 full_month_to_num = Dict{String, Int}(
@@ -21,10 +22,6 @@ abbreviated_month_to_num = Dict{String, Int}(
     "MAY" => 5, "JUN" => 6, "JUL" => 7, "AUG" => 8,
     "SEP" => 9, "OCT" => 10, "NOV" => 11, "DEC" => 12
 )
-
-function month_to_num(month_str::AbstractString)
-    return get(full_month_to_num, month_str, get(abbreviated_month_to_num, month_str, nothing))
-end
 
 function replace_month_with_number(datetime_string::String)
     # Replace full month names
@@ -40,155 +37,10 @@ function replace_month_with_number(datetime_string::String)
     return datetime_string
 end
 
+include("ymds.jl")
+include("dmys.jl")
+include("mdys.jl")
 
-"""
-$docstring_mdy
-"""
-function mdy(date_string::Union{AbstractString, Missing})
-    if ismissing(date_string)
-        return missing
-    else
-        date_string = uppercase(date_string)
-        date_string = replace_month_with_number(date_string)
-        date_string = strip(replace(date_string, r"THE|ST|ND|RD|TH|,|OF |THE" => ""))
-        date_string = replace(date_string, r"\s+" => Base.s" ")
-    end
-        # Add new regex match for "mmddyyyy" format
-        m = match(r"(\d{1,2})(\d{1,2})(\d{4})", date_string)
-        if m !== nothing
-            month_str, day_str, year_str = m.captures
-            month = parse(Int, month_str)
-            day = parse(Int, day_str)
-            year = parse(Int, year_str)
-            return Date(year, month, day)
-        end
-
-    m = match(r"(\w+)\s*(\d{1,2})(st|nd|rd|th)?,?\s*(\d{4})", date_string)
-    if m !== nothing
-        month_str, day_str, _, year_str = m.captures
-        month =  parse(Int, month_str)
-        day = parse(Int, day_str)
-        year = parse(Int, year_str)
-        return Date(year, month, day)
-    end
-
-    # Add new regex match for "m/d/y" and "m-d-y" formats
-    m = match(r"(\d{1,2})[/-](\d{1,2})[/-](\d{4})", date_string)
-    if m !== nothing
-        month_str, day_str, year_str = m.captures
-        month = parse(Int, month_str)
-        day = parse(Int, day_str)
-        year = parse(Int, year_str)
-        return Date(year, month, day)
-    end
-
-    return nothing
-end
-
-"""
-$docstring_dmy
-"""
-function dmy(date_string::Union{AbstractString, Missing})
-    if ismissing(date_string)
-        return missing
-    else
-        date_string = uppercase(date_string)
-        date_string = replace_month_with_number(date_string)
-        date_string = strip(replace(date_string, r"ST|ND|RD|TH|,|OF|THE" => ""))
-        date_string = replace(date_string, r"\s+" => Base.s" ")
-    end
-    
-    # Match for "ddmmyyyy" format
-    m = match(r"(\d{1,2})(\d{1,2})(\d{4})", date_string)
-    if m !== nothing
-        day_str, month_str, year_str = m.captures
-        day = parse(Int, day_str)
-        month = parse(Int, month_str)
-        year = parse(Int, year_str)
-        return Date(year, month, day)
-    end
-
-    # Match for "dd Month yyyy" format
-    m = match(r"(\d{1,2}) (\d{1,2}) (\d{4})", date_string)
-    if m !== nothing
-        day_str, month_str, year_str = m.captures
-        day = parse(Int, day_str)
-        month = parse(Int, month_str)
-        year = parse(Int, year_str)
-        return Date(year, month, day)
-    end
-
-    # Match for "Month dd, yyyy" format
-    m = match(r"(\d{1,2})(ST|ND|RD|TH)?\s*(\w+)\s*(\d{4})", date_string)
-    if m !== nothing
-        day_str, _, month_str, year_str = m.captures
-        day = parse(Int, day_str)
-        year = parse(Int, year_str)
-        month = tryparse(Int, month_str)
-        if month === nothing
-            return missing
-        end
-        return Date(year, month, day)
-    end
-
-    # Match for "dd-mm-yyyy" or "dd/mm/yyyy" format
-    m = match(r"(\d{1,2})[/-](\d{1,2})[/-](\d{4})", date_string)
-    if m !== nothing
-        day_str, month_str, year_str = m.captures
-        day = parse(Int, day_str)
-        month = parse(Int, month_str)
-        year = parse(Int, year_str)
-        return Date(year, month, day)
-    end
-
-    return missing
-end
-
-
-"""
-$docstring_ymd
-"""
-function ymd(date_string::Union{AbstractString, Missing})
-    if ismissing(date_string)
-        return missing
-    else
-        date_string = uppercase(date_string)
-        date_string = replace_month_with_number(date_string)
-        date_string = strip(replace(date_string, r"ST|ND|RD|TH|,|OF|THE" => ""))
-        date_string = replace(date_string, r"\s+" => Base.s" ")
-    end
-    # Try "yyyymmdd" format
-    m = match(r"(\d{4})(\d{1,2})(\d{1,2})", date_string)
-    if m !== nothing
-        year_str, month_str, day_str = m.captures
-        year = parse(Int, year_str)
-        month = parse(Int, month_str)
-        day = parse(Int, day_str)
-        return Date(year, month, day)
-    end
-
-    # Try "yyyy/mm/dd" and "yyyy-mm-dd" formats
-    m = match(r"(\d{4})[/-](\d{1,2})[/-](\d{1,2})", date_string)
-    if m !== nothing
-        year_str, month_str, day_str = m.captures
-        year = parse(Int, year_str)
-        month = parse(Int, month_str)
-        day = parse(Int, day_str)
-        return Date(year, month, day)
-    end
-
-        # Try "Year Month Day" format
-    m = match(r"(\d{4})\s*(\w+)\s*(\d{1,2})(st|nd|rd|th)?", date_string)
-    if m !== nothing
-        year_str, month_str, day_str, _ = m.captures
-        year = parse(Int, year_str)
-        month = parse(Int, month_str)
-        day = parse(Int, day_str)
-        return Date(year, month, day)
-    end
-
-    return nothing
-end
 
 
 """
@@ -242,7 +94,6 @@ function floor_date(dt::Union{DateTime, Missing}, unit::String)
 end
 
 
-
 """
 $docstring_round_date
 """
@@ -284,115 +135,6 @@ function round_date(dt::Union{DateTime, Date, Time, Missing}, unit::String)
     else
         throw(ArgumentError("dt must be a DateTime, Date or Time object."))
     end
-end
-
-
-
-"""
-$docstring_ymd_hms
-"""
-function ymd_hms(datetime_string::Union{AbstractString, Missing})
-    # If input is missing, return missing
-    if ismissing(datetime_string)
-        return missing
-    else
-        datetime_string = uppercase(datetime_string)
-        datetime_string = replace_month_with_number(datetime_string)
-    end
-    # Extract year, month, day, hour, minute, and second using a flexible regular expression
-    m = match(r"(\d{4}).*?(\d{1,2}).*?(\d{1,2}).*?(\d{1,2}).*?(\d{1,2}).*?(\d{1,2})", datetime_string)
-    
-    if m !== nothing
-        year_str, month_str, day_str, hour_str, minute_str, second_str = m.captures
-        year = parse(Int, year_str)
-        month = parse(Int, month_str)
-        day = parse(Int, day_str)
-        hour = parse(Int, hour_str)
-        if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string) 
-            hour += 12
-        end
-        minute = parse(Int, minute_str)
-        second = parse(Int, second_str)
-
-        # Return as DateTime
-        return DateTime(year, month, day, hour, minute, second)
-    end
-
-    # If no match found, return missing
-    return missing
-end
-
-
-
-"""
-$docstring_dmy_hms
-"""
-function dmy_hms(datetime_string::Union{AbstractString, Missing})
-
-    if ismissing(datetime_string)
-        return missing
-    else
-        datetime_string = uppercase(datetime_string)
-        datetime_string = replace_month_with_number(datetime_string)
-    end
-
-    # Extract day, month, year, hour, minute, and second using a flexible regular expression
-    m = match(r"(\d{1,2}).*?(\d{1,2}).*?(\d{4}).*?(\d{1,2}).*?(\d{1,2}).*?(\d{1,2})", datetime_string)
-
-    if m !== nothing
-        day_str, month_str, year_str, hour_str, minute_str, second_str = m.captures
-        day = parse(Int, day_str)
-        month = parse(Int, month_str)
-        year = parse(Int, year_str)
-        hour = parse(Int, hour_str)
-        if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string) 
-            hour += 12
-        end
-        minute = parse(Int, minute_str)
-        second = parse(Int, second_str)
-
-        # Return as DateTime
-        return DateTime(year, month, day, hour, minute, second)
-    end
-
-    # If no match found, return missing
-    return missing
-end
-
-
-"""
-$docstring_mdy_hms
-"""
-function mdy_hms(datetime_string::Union{AbstractString, Missing})
-
-    if ismissing(datetime_string)
-        return missing
-    else
-        datetime_string = uppercase(datetime_string)
-        datetime_string = replace_month_with_number(datetime_string)
-    end
-
-    # Extract year, month, day, hour, minute, and second using a flexible regular expression
-    m = match(r"(\d{1,2}).*?(\d{1,2}).*?(\d{4}).*?(\d{1,2}).*?(\d{1,2}).*?(\d{1,2})", datetime_string)
-
-    if m !== nothing
-        month_str, day_str, year_str, hour_str, minute_str, second_str = m.captures
-        year = parse(Int, year_str)
-        month = parse(Int, month_str)
-        day = parse(Int, day_str)
-        hour = parse(Int, hour_str)
-        if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string) 
-            hour += 12
-        end
-        minute = parse(Int, minute_str)
-        second = parse(Int, second_str)
-
-        # Return as DateTime
-        return DateTime(year, month, day, hour, minute, second)
-    end
-
-    # If no match found, return missing
-    return missing
 end
 
 

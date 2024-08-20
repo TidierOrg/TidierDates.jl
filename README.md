@@ -22,7 +22,7 @@ Pkg.add(url = "https://github.com/TidierOrg/TidierDates.jl.git")
 
 ## What functions does TidierDates.jl support?
 
-- `ymd()`, `ymd_hms()`
+- `ymd()`, `ymd_hms()`, `ymd_h()`, `ymd_hm()`
 - `dmy()`, `dmy_hms()`
 - `mdy()`, `mdy_hms()`
 - `floor_date()`
