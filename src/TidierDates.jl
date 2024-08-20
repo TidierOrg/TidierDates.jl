@@ -50,7 +50,7 @@ function mdy(date_string::Union{AbstractString, Missing})
     else
         date_string = uppercase(date_string)
         date_string = replace_month_with_number(date_string)
-        date_string = strip(replace(date_string, r"ST|ND|RD|TH|,|OF " => ""))
+        date_string = strip(replace(date_string, r"THE|ST|ND|RD|TH|,|OF |THE" => ""))
         date_string = replace(date_string, r"\s+" => Base.s" ")
     end
         # Add new regex match for "mmddyyyy" format
@@ -94,10 +94,11 @@ function dmy(date_string::Union{AbstractString, Missing})
     else
         date_string = uppercase(date_string)
         date_string = replace_month_with_number(date_string)
-        date_string = strip(replace(date_string, r"ST|ND|RD|TH|,|OF" => ""))
+        date_string = strip(replace(date_string, r"ST|ND|RD|TH|,|OF|THE" => ""))
         date_string = replace(date_string, r"\s+" => Base.s" ")
     end
-    # Add  regex match for "ddmmyyyy" format
+    
+    # Match for "ddmmyyyy" format
     m = match(r"(\d{1,2})(\d{1,2})(\d{4})", date_string)
     if m !== nothing
         day_str, month_str, year_str = m.captures
@@ -107,43 +108,40 @@ function dmy(date_string::Union{AbstractString, Missing})
         return Date(year, month, day)
     end
 
-    m = match(r"(\w+)\s*(\d{1,2})(st|nd|rd|th)?,?\s*(\d{4})", date_string)
+    # Match for "dd Month yyyy" format
+    m = match(r"(\d{1,2}) (\d{1,2}) (\d{4})", date_string)
     if m !== nothing
-        try
-            return Date(date_string, DateFormat("d m y"))
-        catch
-            day_str, _, _, month_str, year_str = m.captures
-            month_str = parse(Int, month_str)
-
-            day = parse(Int, day_str)
-            year = parse(Int, year_str)
-            return Date(year, month, day)
-        end
+        day_str, month_str, year_str = m.captures
+        day = parse(Int, day_str)
+        month = parse(Int, month_str)
+        year = parse(Int, year_str)
+        return Date(year, month, day)
     end
 
+    # Match for "Month dd, yyyy" format
+    m = match(r"(\d{1,2})(ST|ND|RD|TH)?\s*(\w+)\s*(\d{4})", date_string)
+    if m !== nothing
+        day_str, _, month_str, year_str = m.captures
+        day = parse(Int, day_str)
+        year = parse(Int, year_str)
+        month = tryparse(Int, month_str)
+        if month === nothing
+            return missing
+        end
+        return Date(year, month, day)
+    end
+
+    # Match for "dd-mm-yyyy" or "dd/mm/yyyy" format
     m = match(r"(\d{1,2})[/-](\d{1,2})[/-](\d{4})", date_string)
     if m !== nothing
         day_str, month_str, year_str = m.captures
-        month = parse(Int, month_str)
         day = parse(Int, day_str)
+        month = parse(Int, month_str)
         year = parse(Int, year_str)
         return Date(year, month, day)
     end
 
-    m = match(r"(\d{1,2})(ST|nd|rd|th)?\s*(of)?\s*(\w+),?\s*(\d{4})", date_string)
-    if m !== nothing
-        day_str, _, _, month_str, year_str = m.captures
-    
-        month = parse(Int, month_str)
-        if month === nothing
-            return nothing
-        end
-        day = parse(Int, day_str)
-        year = parse(Int, year_str)
-        return Date(year, month, day)
-    end
-
-    return nothing
+    return missing
 end
 
 
@@ -156,7 +154,7 @@ function ymd(date_string::Union{AbstractString, Missing})
     else
         date_string = uppercase(date_string)
         date_string = replace_month_with_number(date_string)
-        date_string = strip(replace(date_string, r"ST|ND|RD|TH|,|OF" => ""))
+        date_string = strip(replace(date_string, r"ST|ND|RD|TH|,|OF|THE" => ""))
         date_string = replace(date_string, r"\s+" => Base.s" ")
     end
     # Try "yyyymmdd" format
@@ -226,18 +224,18 @@ function floor_date(dt::Union{DateTime, Missing}, unit::String)
     end
 
     if unit == "year"
-        return DateTime(year(dt))
+        return floor(dt, Year)
     elseif unit == "month"
-        return DateTime(year(dt), month(dt))
+        return floor(dt, Month)
     elseif unit == "week"
         start_of_week = firstdayofweek(dt) - Day(1)
-        return DateTime(year(start_of_week), month(start_of_week), day(start_of_week))
+        return floor(start_of_week, Day)
     elseif unit == "day"
-        return DateTime(year(dt), month(dt), day(dt))
+        return floor(dt, Day)
     elseif unit == "hour"
-        return DateTime(year(dt), month(dt), day(dt), hour(dt))
+        return floor(dt, Hour)
     elseif unit == "minute"
-        return DateTime(year(dt), month(dt), day(dt), hour(dt), minute(dt))
+        return floor(dt, Minute)
     else
         throw(ArgumentError("Unit must be one of 'year', 'month', 'week', 'day', 'hour', or 'minute'."))
     end
@@ -255,29 +253,33 @@ function round_date(dt::Union{DateTime, Date, Time, Missing}, unit::String)
 
     if dt isa DateTime || dt isa Date
         if unit == "year"
-            return month(dt) > 6 || (month(dt) == 6 && day(dt) > 15) ? Date(year(dt) + 1) : Date(year(dt))
+            return round(dt, Year)
         elseif unit == "month"
-            return day(dt) > 15 ? Date(year(dt), month(dt) % 12 + 1) : Date(year(dt), month(dt))
+            return round(dt, Month)
         elseif unit == "day"
-            return Date(year(dt), month(dt), day(dt))
+            return round(dt, Day)
         elseif dt isa DateTime
             if unit == "hour"
-                return minute(dt) >= 30 ? DateTime(year(dt), month(dt), day(dt), hour(dt) % 24 + 1) : DateTime(year(dt), month(dt), day(dt), hour(dt))
+                return round(dt, Hour)
             elseif unit == "minute"
-                return second(dt) >= 30 ? DateTime(year(dt), month(dt), day(dt), hour(dt), minute(dt) % 60 + 1) : DateTime(year(dt), month(dt), day(dt), hour(dt), minute(dt))
+                return round(dt, Minute)
+            elseif unit == "second"
+                return round(dt, Second)
             else
-                throw(ArgumentError("Unit must be one of 'year', 'month', 'day', 'hour', 'minute'."))
+                throw(ArgumentError("Unit must be one of 'year', 'month', 'day', 'hour', 'minute', 'second'."))
             end
         else
             throw(ArgumentError("Unit must be one of 'year', 'month', 'day'."))
         end
     elseif dt isa Time
         if unit == "hour"
-            return minute(dt) >= 30 ? Time(hour(dt) % 24 + 1) : Time(hour(dt))
+            return round(dt, Hour)
         elseif unit == "minute"
-            return second(dt) >= 30 ? Time(hour(dt), minute(dt) % 60 + 1) : Time(hour(dt), minute(dt))
+            return round(dt, Minute)
+        elseif unit == "second"
+            return round(dt, Second)
         else
-            throw(ArgumentError("Unit must be one of 'hour', 'minute'."))
+            throw(ArgumentError("Unit must be one of 'hour', 'minute', 'second'."))
         end
     else
         throw(ArgumentError("dt must be a DateTime, Date or Time object."))

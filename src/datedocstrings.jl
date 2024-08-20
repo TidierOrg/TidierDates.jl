@@ -21,6 +21,12 @@ julia> mdy("12/03/2020")
 julia> mdy("12-03-2020")
 2020-12-03
 
+julia> mdy("1 24 2023")
+2023-01-24
+
+julia> mdy("01 24 2023")
+2023-01-24
+
 julia> mdy(missing)
 missing
 ```
@@ -154,7 +160,7 @@ Round a DateTime, Date, or Time object to the nearest specified unit.
 
 # Arguments
 `dt`: A DateTime, Date, or Time object (can contain missing values in a DataFrame).
-`unit`: A string specifying the units to use for rounding. The units can be one of the following: "year", "month", "day", "hour", "minute".
+`unit`: A string specifying the units to use for rounding. The units can be one of the following: "year", "month", "day", "hour", "minute", "second".
 
 # Returns
 The DateTime, Date, or Time object rounded to the nearest specified unit. If the input is missing, the function returns a missing value.
@@ -168,7 +174,7 @@ julia> round_date(dt, "hour")
 2023-06-15T10:00:00
 
 julia> round_date(dt, "day")
-2023-06-15
+2023-06-15T00:00:00
 
 julia> round_date(missing, "day")
 missing
@@ -202,7 +208,7 @@ julia> ymd_hms("2023/06/15 09:30:00pm")
 julia> ymd_hms("2023 June 15 09:30:00am")
 2023-06-15T09:30:00 
 
-julia> ymd_hms("2023 June 15 09:30:00pm")
+julia> ymd_hms("2023 June 15 09:30:00 P")
 2023-06-15T21:30:00
 
 julia> ymd_hms(missing)
