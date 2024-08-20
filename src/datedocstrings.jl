@@ -18,7 +18,6 @@ julia> mdy("December 3, 2020")
 julia> mdy("12/03/2020")
 2020-12-03
 
-
 julia> mdy("12-03-2020")
 2020-12-03
 
@@ -79,6 +78,9 @@ julia> ymd("2020/12/03")
 2020-12-03
 
 julia> ymd("2020-12-03")
+2020-12-03
+
+julia> ymd("2020 12 03")
 2020-12-03
 
 julia> ymd("2020 December 3rd")
@@ -194,6 +196,15 @@ julia> ymd_hms("2023-06-15 09:30:00")
 julia> ymd_hms("2023/06/15 09:30:00")
 2023-06-15T09:30:00
 
+julia> ymd_hms("2023/06/15 09:30:00pm")
+2023-06-15T21:30:00
+
+julia> ymd_hms("2023 June 15 09:30:00am")
+2023-06-15T09:30:00 
+
+julia> ymd_hms("2023 June 15 09:30:00pm")
+2023-06-15T21:30:00
+
 julia> ymd_hms(missing)
 missing
 ```
@@ -218,6 +229,9 @@ julia> mdy_hms("06/15/2023 08:30:15")
 
 julia> mdy_hms("06.15.2023.08.30.15")
 2023-06-15T08:30:15
+
+julia> mdy_hms("06.15.2023.08.30.15 pm")
+2023-06-15T20:30:15
 
 julia> mdy_hms("06152023083015")
 2023-06-15T08:30:15
@@ -244,8 +258,11 @@ A DateTime object converted from the string. If the input is missing or the stri
 julia> dmy_hms("15-06-2023 09:30:00")
 2023-06-15T09:30:00
 
-julia> dmy_hms("15/06/2023 09:30:00")
-2023-06-15T09:30:00
+julia> dmy_hms("15/06/2023 09:30:00pm")
+2023-06-15T21:30:00
+
+julia> dmy_hms("15 jan 2023 09:30:00 p")
+2023-01-15T21:30:00
 
 julia> dmy_hms(missing)
 missing
