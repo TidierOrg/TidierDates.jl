@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.32">
     
     
       
@@ -458,17 +458,25 @@
 <ul>
 <li><a href="./#TidierDates.am-Tuple{DateTime}"><code>TidierDates.am</code></a></li>
 <li><a href="./#TidierDates.days_in_month-Tuple{TimeType}"><code>TidierDates.days_in_month</code></a></li>
+<li><a href="./#TidierDates.difftime-Tuple{Union{Missing, DateTime}, Union{Missing, DateTime}, AbstractString}"><code>TidierDates.difftime</code></a></li>
 <li><a href="./#TidierDates.dmy-Tuple{Union{Missing, AbstractString}}"><code>TidierDates.dmy</code></a></li>
+<li><a href="./#TidierDates.dmy_h-Tuple{Union{Missing, AbstractString}}"><code>TidierDates.dmy_h</code></a></li>
+<li><a href="./#TidierDates.dmy_hm-Tuple{Union{Missing, AbstractString}}"><code>TidierDates.dmy_hm</code></a></li>
 <li><a href="./#TidierDates.dmy_hms-Tuple{Union{Missing, AbstractString}}"><code>TidierDates.dmy_hms</code></a></li>
 <li><a href="./#TidierDates.floor_date-Tuple{Union{Missing, DateTime}, String}"><code>TidierDates.floor_date</code></a></li>
 <li><a href="./#TidierDates.hms-Tuple{Union{Missing, String}}"><code>TidierDates.hms</code></a></li>
 <li><a href="./#TidierDates.leap_year-Tuple{Int64}"><code>TidierDates.leap_year</code></a></li>
 <li><a href="./#TidierDates.mdy-Tuple{Union{Missing, AbstractString}}"><code>TidierDates.mdy</code></a></li>
+<li><a href="./#TidierDates.mdy_h-Tuple{Union{Missing, AbstractString}}"><code>TidierDates.mdy_h</code></a></li>
+<li><a href="./#TidierDates.mdy_hm-Tuple{Union{Missing, AbstractString}}"><code>TidierDates.mdy_hm</code></a></li>
 <li><a href="./#TidierDates.mdy_hms-Tuple{Union{Missing, AbstractString}}"><code>TidierDates.mdy_hms</code></a></li>
 <li><a href="./#TidierDates.now"><code>TidierDates.now</code></a></li>
 <li><a href="./#TidierDates.pm-Tuple{DateTime}"><code>TidierDates.pm</code></a></li>
+<li><a href="./#TidierDates.round_date-Tuple{Union{Missing, Date, DateTime, Time}, String}"><code>TidierDates.round_date</code></a></li>
 <li><a href="./#TidierDates.today"><code>TidierDates.today</code></a></li>
 <li><a href="./#TidierDates.ymd-Tuple{Union{Missing, AbstractString}}"><code>TidierDates.ymd</code></a></li>
+<li><a href="./#TidierDates.ymd_h-Tuple{Union{Missing, AbstractString}}"><code>TidierDates.ymd_h</code></a></li>
+<li><a href="./#TidierDates.ymd_hm-Tuple{Union{Missing, AbstractString}}"><code>TidierDates.ymd_hm</code></a></li>
 <li><a href="./#TidierDates.ymd_hms-Tuple{Union{Missing, AbstractString}}"><code>TidierDates.ymd_hms</code></a></li>
 </ul>
 <p><a id='Reference-Exported-functions'></a></p>
@@ -490,7 +498,7 @@
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">am</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
 <span class="go">true</span>
 </code></pre></div>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L425-L444' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/TidierDates.jl#L194-L213' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.days_in_month-Tuple{TimeType}' href='#TidierDates.days_in_month-Tuple{TimeType}'>#</a>
 <strong><code>TidierDates.days_in_month</code></strong> &mdash; <em>Method</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">days_in_month</span><span class="p">(</span><span class="n">date</span><span class="o">::</span><span class="kt">Date</span><span class="p">)</span><span class="o">::</span><span class="kt">Int</span>
@@ -513,7 +521,32 @@
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">days_in_month</span><span class="p">(</span><span class="n">Date</span><span class="p">(</span><span class="mi">2016</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span>
 <span class="go">29</span>
 </code></pre></div>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L466-L492' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/TidierDates.jl#L235-L260' class='documenter-source'>source</a><br></p>
+<p><a id='TidierDates.difftime-Tuple{Union{Missing, DateTime}, Union{Missing, DateTime}, AbstractString}' href='#TidierDates.difftime-Tuple{Union{Missing, DateTime}, Union{Missing, DateTime}, AbstractString}'>#</a>
+<strong><code>TidierDates.difftime</code></strong> &mdash; <em>Method</em>.</p>
+<p>difftime(time1::Union{DateTime, Missing}, time2::Union{DateTime, Missing}, units::AbstractString)</p>
+<p>Calculate the difference between two times in the specified units.</p>
+<p><strong>Arguments</strong></p>
+<p><code>time1</code>: A DateTime object (can contain missing values in a DataFrame). <code>time2</code>: A DateTime object (can contain missing values in a DataFrame). <code>units</code>: A string specifying the units to use when calculating the difference between the two times. The units can be one of the following: "seconds", "minutes", "hours", "days", "weeks".</p>
+<p><strong>Returns</strong></p>
+<p>The difference between the two times in the specified units. If either of the inputs is missing, the function returns a missing value.</p>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">time1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="go">2023-06-15T09:30:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">time2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="go">2023-06-15T08:30:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">difftime</span><span class="p">(</span><span class="n">time1</span><span class="p">,</span><span class="w"> </span><span class="n">time2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hours&quot;</span><span class="p">)</span>
+<span class="go">1.0</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">difftime</span><span class="p">(</span><span class="n">time1</span><span class="p">,</span><span class="w"> </span><span class="n">time2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;minutes&quot;</span><span class="p">)</span>
+<span class="go">60.0</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">difftime</span><span class="p">(</span><span class="n">time1</span><span class="p">,</span><span class="w"> </span><span class="nb">missing</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hours&quot;</span><span class="p">)</span>
+<span class="go">missing</span>
+</code></pre></div>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/TidierDates.jl#L141-L171' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.dmy-Tuple{Union{Missing, AbstractString}}' href='#TidierDates.dmy-Tuple{Union{Missing, AbstractString}}'>#</a>
 <strong><code>TidierDates.dmy</code></strong> &mdash; <em>Method</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">dmy</span><span class="p">(</span><span class="n">date_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span>
@@ -543,7 +576,47 @@
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dmy</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
 <span class="go">missing</span>
 </code></pre></div>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L86-L117' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/dmys.jl#L1-L32' class='documenter-source'>source</a><br></p>
+<p><a id='TidierDates.dmy_h-Tuple{Union{Missing, AbstractString}}' href='#TidierDates.dmy_h-Tuple{Union{Missing, AbstractString}}'>#</a>
+<strong><code>TidierDates.dmy_h</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">dmy_h</span><span class="p">(</span><span class="n">datetime_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span><span class="o">::</span><span class="kt">DateTime</span>
+</code></pre></div>
+<p>Converts a date and time string in the format "DD-MM-YYYY HH" to a DateTime object.</p>
+<p><strong>Arguments</strong></p>
+<p><code>datetime_string</code>: A string containing a datetime representation (can contain missing values in a DataFrame).</p>
+<p><strong>Returns</strong></p>
+<p>A DateTime object constructed from the parsed day, month, year, and hour values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the datetime information cannot be parsed from the string.  </p>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dmy_h</span><span class="p">(</span><span class="s">&quot;01/01/2020 4PM&quot;</span><span class="p">)</span>
+<span class="go">2020-01-01T16:00:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dmy_h</span><span class="p">(</span><span class="s">&quot;01-01-2020 16hrs&quot;</span><span class="p">)</span>
+<span class="go">2020-01-01T16:00:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dmy_h</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
+<span class="go">missing</span>
+</code></pre></div>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/dmys.jl#L96-L118' class='documenter-source'>source</a><br></p>
+<p><a id='TidierDates.dmy_hm-Tuple{Union{Missing, AbstractString}}' href='#TidierDates.dmy_hm-Tuple{Union{Missing, AbstractString}}'>#</a>
+<strong><code>TidierDates.dmy_hm</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">dmy_hm</span><span class="p">(</span><span class="n">datetime_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span><span class="o">::</span><span class="kt">DateTime</span>
+</code></pre></div>
+<p>Converts a date and time string in the format "DD-MM-YYYY HH:MM" to a DateTime object.</p>
+<p><strong>Arguments</strong></p>
+<p><code>datetime_string</code>: A string containing a datetime representation (can contain missing values in a DataFrame).</p>
+<p><strong>Returns</strong></p>
+<p>A DateTime object constructed from the parsed day, month, year, hour, and minute values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the datetime information cannot be parsed from the string.</p>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dmy_hm</span><span class="p">(</span><span class="s">&quot;01/01/2020 4:30PM&quot;</span><span class="p">)</span>
+<span class="go">2020-01-01T16:30:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dmy_hm</span><span class="p">(</span><span class="s">&quot;01/01/2020 4:30 a&quot;</span><span class="p">)</span>
+<span class="go">2020-01-01T04:30:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dmy_hm</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
+<span class="go">missing</span>
+</code></pre></div>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/dmys.jl#L128-L150' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.dmy_hms-Tuple{Union{Missing, AbstractString}}' href='#TidierDates.dmy_hms-Tuple{Union{Missing, AbstractString}}'>#</a>
 <strong><code>TidierDates.dmy_hms</code></strong> &mdash; <em>Method</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">dmy_hms</span><span class="p">(</span><span class="n">datetime_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span>
@@ -557,13 +630,16 @@
 <div class="highlight"><pre><span></span><code><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dmy_hms</span><span class="p">(</span><span class="s">&quot;15-06-2023 09:30:00&quot;</span><span class="p">)</span>
 <span class="go">2023-06-15T09:30:00</span>
 
-<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dmy_hms</span><span class="p">(</span><span class="s">&quot;15/06/2023 09:30:00&quot;</span><span class="p">)</span>
-<span class="go">2023-06-15T09:30:00</span>
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dmy_hms</span><span class="p">(</span><span class="s">&quot;15/06/2023 09:30:00pm&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T21:30:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dmy_hms</span><span class="p">(</span><span class="s">&quot;15 jan 2023 09:30:00 p&quot;</span><span class="p">)</span>
+<span class="go">2023-01-15T21:30:00</span>
 
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dmy_hms</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
 <span class="go">missing</span>
 </code></pre></div>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L311-L333' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/dmys.jl#L61-L86' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.floor_date-Tuple{Union{Missing, DateTime}, String}' href='#TidierDates.floor_date-Tuple{Union{Missing, DateTime}, String}'>#</a>
 <strong><code>TidierDates.floor_date</code></strong> &mdash; <em>Method</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">floor_date</span><span class="p">(</span><span class="n">dt</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">DateTime</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">},</span><span class="w"> </span><span class="n">unit</span><span class="o">::</span><span class="kt">String</span><span class="p">)</span>
@@ -590,7 +666,7 @@
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">floor_date</span><span class="p">(</span><span class="nb">missing</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;day&quot;</span><span class="p">)</span>
 <span class="go">missing</span>
 </code></pre></div>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L211-L242' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/TidierDates.jl#L70-L101' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.hms-Tuple{Union{Missing, String}}' href='#TidierDates.hms-Tuple{Union{Missing, String}}'>#</a>
 <strong><code>TidierDates.hms</code></strong> &mdash; <em>Method</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">hms</span><span class="p">(</span><span class="n">time_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">String</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span>
@@ -605,7 +681,7 @@
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">hms</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
 <span class="go">missing</span>
 </code></pre></div>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L187-L204' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/TidierDates.jl#L46-L63' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.leap_year-Tuple{Int64}' href='#TidierDates.leap_year-Tuple{Int64}'>#</a>
 <strong><code>TidierDates.leap_year</code></strong> &mdash; <em>Method</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">leap_year</span><span class="p">(</span><span class="n">date</span><span class="o">::</span><span class="kt">Date</span><span class="p">)</span><span class="o">::</span><span class="kt">Bool</span>
@@ -623,7 +699,7 @@
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">leap_year</span><span class="p">(</span><span class="mi">2020</span><span class="p">)</span>
 <span class="go">true</span>
 </code></pre></div>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L447-L468' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/TidierDates.jl#L216-L237' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.mdy-Tuple{Union{Missing, AbstractString}}' href='#TidierDates.mdy-Tuple{Union{Missing, AbstractString}}'>#</a>
 <strong><code>TidierDates.mdy</code></strong> &mdash; <em>Method</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mdy</span><span class="p">(</span><span class="n">date_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span>
@@ -641,14 +717,59 @@
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy</span><span class="p">(</span><span class="s">&quot;12/03/2020&quot;</span><span class="p">)</span>
 <span class="go">2020-12-03</span>
 
-
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy</span><span class="p">(</span><span class="s">&quot;12-03-2020&quot;</span><span class="p">)</span>
 <span class="go">2020-12-03</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy</span><span class="p">(</span><span class="s">&quot;1 24 2023&quot;</span><span class="p">)</span>
+<span class="go">2023-01-24</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy</span><span class="p">(</span><span class="s">&quot;01 24 2023&quot;</span><span class="p">)</span>
+<span class="go">2023-01-24</span>
 
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
 <span class="go">missing</span>
 </code></pre></div>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L41-L67' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/mdys.jl#L1-L32' class='documenter-source'>source</a><br></p>
+<p><a id='TidierDates.mdy_h-Tuple{Union{Missing, AbstractString}}' href='#TidierDates.mdy_h-Tuple{Union{Missing, AbstractString}}'>#</a>
+<strong><code>TidierDates.mdy_h</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">mdy_h</span><span class="p">(</span><span class="n">datetime_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span><span class="o">::</span><span class="kt">DateTime</span>
+</code></pre></div>
+<p>Converts a date and time string in the format "MM-DD-YYYY HH" to a DateTime object.</p>
+<p><strong>Arguments</strong></p>
+<p><code>datetime_string</code>: A string containing a datetime representation (can contain missing values in a DataFrame).</p>
+<p><strong>Returns</strong></p>
+<p>A DateTime object constructed from the parsed month, day, year, and hour values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the datetime information cannot be parsed from the string.</p>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy_h</span><span class="p">(</span><span class="s">&quot;06-15-2023 09hr&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T09:00:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy_h</span><span class="p">(</span><span class="s">&quot;06-15-2023 09hr p&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T21:00:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy_h</span><span class="p">(</span><span class="s">&quot;jan 3 2023 09hr p&quot;</span><span class="p">)</span>
+<span class="go">2023-01-03T21:00:00</span>
+
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy_h</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
+<span class="go">missing</span>
+</code></pre></div>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/mdys.jl#L114-L140' class='documenter-source'>source</a><br></p>
+<p><a id='TidierDates.mdy_hm-Tuple{Union{Missing, AbstractString}}' href='#TidierDates.mdy_hm-Tuple{Union{Missing, AbstractString}}'>#</a>
+<strong><code>TidierDates.mdy_hm</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">mdy_hm</span><span class="p">(</span><span class="n">datetime_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span><span class="o">::</span><span class="kt">DateTime</span>
+</code></pre></div>
+<p>Converts a date and time string in the format "MM-DD-YYYY HH:MM" to a DateTime object.</p>
+<p><strong>Arguments</strong></p>
+<p><code>datetime_string</code>: A string containing a datetime representation (can contain missing values in a DataFrame).</p>
+<p><strong>Returns</strong></p>
+<p>A DateTime object constructed from the parsed month, day, year, and hour values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the datetime information cannot be parsed from the string.</p>
+<p><strong>Examples</strong></p>
+<p>```jldoctest julia&gt; mdy_hm("06-15-2023 09:03 P") 2023-06-15T21:03:00</p>
+<p>julia&gt; mdy_hm("06-15-2023 09:03 p")</p>
+<p>julia&gt; mdy_hm("06-15-2023 09:03 ") 2023-06-15T09:03:00</p>
+<p>julia&gt; mdy_hm("june 15 2023 09:03 p") 2023-06-15T21:03:00</p>
+<p>julia&gt; mdy_hm(missing) missing</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/mdys.jl#L80-L106' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.mdy_hms-Tuple{Union{Missing, AbstractString}}' href='#TidierDates.mdy_hms-Tuple{Union{Missing, AbstractString}}'>#</a>
 <strong><code>TidierDates.mdy_hms</code></strong> &mdash; <em>Method</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">mdy_hms</span><span class="p">(</span><span class="n">datetime_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span>
@@ -665,13 +786,16 @@
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy_hms</span><span class="p">(</span><span class="s">&quot;06.15.2023.08.30.15&quot;</span><span class="p">)</span>
 <span class="go">2023-06-15T08:30:15</span>
 
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy_hms</span><span class="p">(</span><span class="s">&quot;06.15.2023.08.30.15 pm&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T20:30:15</span>
+
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy_hms</span><span class="p">(</span><span class="s">&quot;06152023083015&quot;</span><span class="p">)</span>
 <span class="go">2023-06-15T08:30:15</span>
 
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">mdy_hms</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
 <span class="go">missing</span>
 </code></pre></div>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L341-L366' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/mdys.jl#L45-L73' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.now' href='#TidierDates.now'>#</a>
 <strong><code>TidierDates.now</code></strong> &mdash; <em>Function</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">now</span><span class="p">(</span><span class="n">tzone</span><span class="o">::</span><span class="kt">AbstractString</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">::</span><span class="kt">ZonedDateTime</span>
@@ -681,7 +805,7 @@
 <p><code>tzone</code>: A string specifying the time zone to use. If not provided, the default time zone is used.</p>
 <p><strong>Returns</strong></p>
 <p>A ZonedDateTime object representing the current date and time in the specified time zone.</p>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L401-L412' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/TidierDates.jl#L170-L181' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.pm-Tuple{DateTime}' href='#TidierDates.pm-Tuple{DateTime}'>#</a>
 <strong><code>TidierDates.pm</code></strong> &mdash; <em>Method</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">pm</span><span class="p">(</span><span class="n">dt</span><span class="o">::</span><span class="kt">DateTime</span><span class="p">)</span><span class="o">::</span><span class="kt">Bool</span>
@@ -698,7 +822,30 @@
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">pm</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
 <span class="go">false</span>
 </code></pre></div>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L436-L455' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/TidierDates.jl#L205-L224' class='documenter-source'>source</a><br></p>
+<p><a id='TidierDates.round_date-Tuple{Union{Missing, Date, DateTime, Time}, String}' href='#TidierDates.round_date-Tuple{Union{Missing, Date, DateTime, Time}, String}'>#</a>
+<strong><code>TidierDates.round_date</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">round_date</span><span class="p">(</span><span class="n">dt</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">DateTime</span><span class="p">,</span><span class="w"> </span><span class="kt">Date</span><span class="p">,</span><span class="w"> </span><span class="kt">Time</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">},</span><span class="w"> </span><span class="n">unit</span><span class="o">::</span><span class="kt">String</span><span class="p">)</span>
+</code></pre></div>
+<p>Round a DateTime, Date, or Time object to the nearest specified unit.</p>
+<p><strong>Arguments</strong></p>
+<p><code>dt</code>: A DateTime, Date, or Time object (can contain missing values in a DataFrame). <code>unit</code>: A string specifying the units to use for rounding. The units can be one of the following: "year", "month", "day", "hour", "minute", "second".</p>
+<p><strong>Returns</strong></p>
+<p>The DateTime, Date, or Time object rounded to the nearest specified unit. If the input is missing, the function returns a missing value.</p>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DateTime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">)</span>
+<span class="go">2023-06-15T09:45:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">round_date</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hour&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T10:00:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">round_date</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;day&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T00:00:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">round_date</span><span class="p">(</span><span class="nb">missing</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;day&quot;</span><span class="p">)</span>
+<span class="go">missing</span>
+</code></pre></div>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/TidierDates.jl#L97-L123' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.today' href='#TidierDates.today'>#</a>
 <strong><code>TidierDates.today</code></strong> &mdash; <em>Function</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">today</span><span class="p">(</span><span class="n">tzone</span><span class="o">::</span><span class="kt">AbstractString</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">::</span><span class="kt">ZonedDateTime</span>
@@ -708,7 +855,7 @@
 <p><code>tzone</code>: A string specifying the time zone to use. If not provided, the default time zone is used.</p>
 <p><strong>Returns</strong></p>
 <p>A ZonedDateTime object representing the current date in the specified time zone.</p>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L413-L424' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/TidierDates.jl#L182-L193' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.ymd-Tuple{Union{Missing, AbstractString}}' href='#TidierDates.ymd-Tuple{Union{Missing, AbstractString}}'>#</a>
 <strong><code>TidierDates.ymd</code></strong> &mdash; <em>Method</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">ymd</span><span class="p">(</span><span class="n">date_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span>
@@ -726,13 +873,56 @@
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd</span><span class="p">(</span><span class="s">&quot;2020-12-03&quot;</span><span class="p">)</span>
 <span class="go">2020-12-03</span>
 
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd</span><span class="p">(</span><span class="s">&quot;2020 12 03&quot;</span><span class="p">)</span>
+<span class="go">2020-12-03</span>
+
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd</span><span class="p">(</span><span class="s">&quot;2020 December 3rd&quot;</span><span class="p">)</span>
 <span class="go">2020-12-03</span>
 
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
 <span class="go">missing</span>
 </code></pre></div>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L144-L169' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/ymds.jl#L1-L29' class='documenter-source'>source</a><br></p>
+<p><a id='TidierDates.ymd_h-Tuple{Union{Missing, AbstractString}}' href='#TidierDates.ymd_h-Tuple{Union{Missing, AbstractString}}'>#</a>
+<strong><code>TidierDates.ymd_h</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">ymd_h</span><span class="p">(</span><span class="n">datetime_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span><span class="o">::</span><span class="kt">DateTime</span>
+</code></pre></div>
+<p>Converts a date and time string in the format "YYYY-MM-DD HH" to a DateTime object. </p>
+<p><strong>Arguments</strong></p>
+<p><code>datetime_string</code>: A string containing a datetime representation (can contain missing values in a DataFrame).</p>
+<p><strong>Returns</strong></p>
+<p>A DateTime object constructed from the parsed year, month, day, and hour values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the datetime information cannot be parsed from the string.</p>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd_h</span><span class="p">(</span><span class="s">&quot;2023-06-15 09hr&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T09:00:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd_h</span><span class="p">(</span><span class="s">&quot;2023-06-15 09hr p&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T21:00:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd_h</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
+<span class="go">missing</span>
+</code></pre></div>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/ymds.jl#L114-L136' class='documenter-source'>source</a><br></p>
+<p><a id='TidierDates.ymd_hm-Tuple{Union{Missing, AbstractString}}' href='#TidierDates.ymd_hm-Tuple{Union{Missing, AbstractString}}'>#</a>
+<strong><code>TidierDates.ymd_hm</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">ymd_hm</span><span class="p">(</span><span class="n">datetime_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span><span class="o">::</span><span class="kt">DateTime</span>
+</code></pre></div>
+<p>Converts a date and time string in the format "YYYY-MM-DD HH:MM" to a DateTime object.</p>
+<p><strong>Arguments</strong></p>
+<p><code>datetime_string</code>: A string containing a datetime representation (can contain missing values in a DataFrame).</p>
+<p><strong>Returns</strong></p>
+<p>A DateTime object constructed from the parsed year, month, day, hour, and minute values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the datetime information cannot be parsed from the string.</p>
+<p><strong>Examples</strong></p>
+<div class="highlight"><pre><span></span><code><span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd_hm</span><span class="p">(</span><span class="s">&quot;2023-06-15 09:30&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T09:30:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd_hm</span><span class="p">(</span><span class="s">&quot;2023-06-15 09:30p&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T21:30:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd_hm</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
+<span class="go">missing</span>
+</code></pre></div>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/ymds.jl#L80-L102' class='documenter-source'>source</a><br></p>
 <p><a id='TidierDates.ymd_hms-Tuple{Union{Missing, AbstractString}}' href='#TidierDates.ymd_hms-Tuple{Union{Missing, AbstractString}}'>#</a>
 <strong><code>TidierDates.ymd_hms</code></strong> &mdash; <em>Method</em>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">ymd_hms</span><span class="p">(</span><span class="n">datetime_string</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="kt">Missing</span><span class="p">})</span>
@@ -749,10 +939,19 @@
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd_hms</span><span class="p">(</span><span class="s">&quot;2023/06/15 09:30:00&quot;</span><span class="p">)</span>
 <span class="go">2023-06-15T09:30:00</span>
 
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd_hms</span><span class="p">(</span><span class="s">&quot;2023/06/15 09:30:00pm&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T21:30:00</span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd_hms</span><span class="p">(</span><span class="s">&quot;2023 June 15 09:30:00am&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T09:30:00 </span>
+
+<span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd_hms</span><span class="p">(</span><span class="s">&quot;2023 June 15 09:30:00 P&quot;</span><span class="p">)</span>
+<span class="go">2023-06-15T21:30:00</span>
+
 <span class="gp">julia&gt;</span><span class="w"> </span><span class="n">ymd_hms</span><span class="p">(</span><span class="nb">missing</span><span class="p">)</span>
 <span class="go">missing</span>
 </code></pre></div>
-<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/7c50a0a4173ad680e6ab709dd5708e1d5469498f/src/TidierDates.jl#L282-L305' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/TidierOrg/TidierDates.jl/blob/5e451935969bb7b4ec46cf3b9ce5d23b81ddd2bf/src/ymds.jl#L46-L78' class='documenter-source'>source</a><br></p>
 <p><a id='Reference-Internal-functions'></a></p>
 <p><a id='Reference-Internal-functions-1'></a></p>
 <h2 id="reference-internal-functions">Reference - Internal functions<a class="headerlink" href="#reference-internal-functions" title="Permanent link">¤</a></h2>
@@ -861,7 +1060,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "header.autohide"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="../assets/javascripts/bundle.471ce7a9.min.js"></script>
       
         <script src="../javascripts/mathjax.js"></script>
       
