@@ -8,7 +8,7 @@ include("datedocstrings.jl")
 
 export mdy, mdy_hms, dmy, dmy_hms, ymd, ymd_hms, ymd_h, ymd_hm, 
 hms, difftime, floor_date, round_date, now, today, am, pm, leap_year, 
-days_in_month, dmy_h, dmy_hm, mdy_h, mdy_hm
+days_in_month, dmy_h, dmy_hm, mdy_h, mdy_hm, hm
 
 #### Create dictionaries to map full and abbreviated month names to numbers
 full_month_to_num = Dict{String, Int}(
@@ -70,7 +70,7 @@ end
 """
 $docstring_floor_date
 """
-function floor_date(dt::Union{DateTime, Missing}, unit::String)
+function floor_date(dt::Union{DateTime, Date, Time, Missing}, unit::String)
     if ismissing(dt)
         return missing
     end
@@ -80,8 +80,13 @@ function floor_date(dt::Union{DateTime, Missing}, unit::String)
     elseif unit == "month"
         return floor(dt, Month)
     elseif unit == "week"
-        start_of_week = firstdayofweek(dt) - Day(1)
-        return floor(start_of_week, Day)
+        if dayofweek(dt) != 7
+            start_of_week = floor(dt, Week)
+            start_of_week -= Day(1)
+            return start_of_week
+        else
+            return dt
+        end
     elseif unit == "day"
         return floor(dt, Day)
     elseif unit == "hour"
@@ -241,6 +246,21 @@ function days_in_month(dt::TimeType)::Int
     end
 
     return daysinmonth(dt)
+end
+
+
+"""
+$docstring_hm
+"""
+function hm(time_string::Union{AbstractString, Missing})
+    if ismissing(time_string)
+        return missing
+    end
+    try
+        return Time(time_string, "HH:MM")
+    catch
+       return missing
+    end
 end
 
 end

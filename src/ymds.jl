@@ -98,10 +98,20 @@ function ymd_hm(datetime_string::Union{AbstractString, Missing})
         month = parse(Int, month_str)
         day = parse(Int, day_str)
         hour = parse(Int, hour_str)
+        minute = parse(Int, minute_str)
+        if minute == 60
+            @warn "Minute is 60, returning missing"
+            return missing
+        end
+        # Handle AM/PM format
         if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string)
             hour += 12
         end
-        minute = parse(Int, minute_str)
+
+        # Handle the case when hour is 24 by incrementing the date and setting the time to 00:xx
+        if hour == 24
+            return DateTime(year, month, day, 0, minute) + Day(1)
+        end
 
         # Return as DateTime
         return DateTime(year, month, day, hour, minute)
@@ -110,6 +120,7 @@ function ymd_hm(datetime_string::Union{AbstractString, Missing})
     # If no match found, return missing
     return missing
 end
+
 
 """
 $docstring_ymd_h

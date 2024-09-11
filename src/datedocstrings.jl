@@ -131,7 +131,7 @@ Round down a DateTime object to the nearest specified unit.
 # Returns
 The DateTime object rounded down to the nearest specified unit. If the input is missing, the function returns a missing value.
 
-When using the "week" unit, Sunday is considered the first day of the week.
+When using the "week" unit, Sunday is considered the first day of the week, and if the date is already a Sunday, it is returned as is.
 
 # Examples
 ```jldoctest
@@ -401,7 +401,6 @@ false
 julia> leap_year(2020)
 true
 ```
-
 """
 
 const docstring_days_in_month =
@@ -579,7 +578,8 @@ A DateTime object constructed from the parsed month, day, year, and hour values 
 julia> mdy_hm("06-15-2023 09:03 P")
 2023-06-15T21:03:00
 
-julia> mdy_hm("06-15-2023 09:03 p")
+julia> mdy_hm("june 15 2023 09:03 p")
+2023-06-15T21:03:00
 
 julia> mdy_hm("06-15-2023 09:03 ")
 2023-06-15T09:03:00
@@ -589,4 +589,27 @@ julia> mdy_hm("june 15 2023 09:03 p")
 
 julia> mdy_hm(missing)
 missing
+```
+"""
+
+const docstring_hm =
+"""
+    hm(time_string::Union{AbstractString, Missing})::Time
+
+Converts a time string in the format "HH:MM" to a Time object.
+
+# Arguments
+`time_string`: A string containing a time representation. 
+
+# Returns
+A Time object constructed from the parsed hour and minute values from the input string, if all can be parsed successfully. Returns a missing value if the input is missing or if the time information cannot be parsed from the string.
+
+# Examples
+```jldoctest
+julia> hm("09:30")
+09:30:00
+
+julia> hm("12:60")
+missing
+```
 """
