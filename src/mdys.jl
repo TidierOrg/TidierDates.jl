@@ -64,7 +64,7 @@ function mdy(date_string::Union{AbstractString, Missing})
         return Date(year, month, day)
     end
 
-    return nothing
+    return missing
 end
 
 
@@ -92,13 +92,19 @@ function mdy_hms(datetime_string::Union{AbstractString, Missing})
         month = parse(Int, month_str)
         day = parse(Int, day_str)
         hour = parse(Int, hour_str)
-        if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string) 
-            hour += 12
+        if length(year_str) == 2
+            if year > 30
+                year += 1900
+            else
+            year += 2000
+            end
         end
         minute = parse(Int, minute_str)
         second = parse(Int, second_str)
 
-        # Return as DateTime
+    if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string)
+        hour += 12
+    end   # Return as DateTime
         return DateTime(year, month, day, hour, minute, second)
     end
 
@@ -140,10 +146,10 @@ function mdy_hm(datetime_string::Union{AbstractString, Missing})
         # Handle the case when hour is 24 by incrementing the date and setting time to 00:xx
         if hour == 24
             return DateTime(year, month, day, 0, minute) + Day(1)
+    
+        else
+           return DateTime(year, month, day, hour, minute)
         end
-
-        # Return as DateTime
-        return DateTime(year, month, day, hour, minute)
     end
 
     # If no match found, return missing
@@ -175,9 +181,12 @@ function mdy_h(datetime_string::Union{AbstractString, Missing})
         if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string)
             hour += 12
         end
-
-        # Return as DateTime
-        return DateTime(year, month, day, hour)
+        if hour == 24
+            return DateTime(year, month, day, 0) + Day(1)
+    
+        else
+           return DateTime(year, month, day, hour)
+        end
     end
 
     # If no match found, return missing

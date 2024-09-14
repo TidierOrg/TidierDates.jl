@@ -559,12 +559,11 @@ A DateTime object constructed from the parsed month, day, year, and hour values 
 julia> mdy_h("06-15-2023 09hr")
 2023-06-15T09:00:00
 
-julia> mdy_h("06-15-2023 09hr p")
+julia> mdy_h("06-15-2023 09hr pM")
 2023-06-15T21:00:00
 
 julia> mdy_h("jan 3 2023 09hr p")
 2023-01-03T21:00:00
-
 
 julia> mdy_h(missing)
 missing
