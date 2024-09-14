@@ -10,52 +10,61 @@ function dmy(date_string::Union{AbstractString, Missing})
         date_string = strip(replace(date_string, r"ST|ND|RD|TH|,|OF|THE" => ""))
         date_string = replace(date_string, r"\s+" => Base.s" ")
     end
-    
-    # Match for "ddmmyyyy" format
-    m = match(r"(\d{1,2})(\d{1,2})(\d{4})", date_string)
+
+    # Match for "ddmmyyyy" or "ddmmyy" format
+    m = match(r"^(\d{1,2})(\d{1,2})(\d{2,4})$", date_string)
     if m !== nothing
         day_str, month_str, year_str = m.captures
         day = parse(Int, day_str)
         month = parse(Int, month_str)
         year = parse(Int, year_str)
-        return Date(year, month, day)
-    end
-
-    # Match for "dd Month yyyy" format
-    m = match(r"(\d{1,2}) (\d{1,2}) (\d{4})", date_string)
-    if m !== nothing
-        day_str, month_str, year_str = m.captures
-        day = parse(Int, day_str)
-        month = parse(Int, month_str)
-        year = parse(Int, year_str)
-        return Date(year, month, day)
-    end
-
-    # Match for "Month dd, yyyy" format
-    m = match(r"(\d{1,2})(ST|ND|RD|TH)?\s*(\w+)\s*(\d{4})", date_string)
-    if m !== nothing
-        day_str, _, month_str, year_str = m.captures
-        day = parse(Int, day_str)
-        year = parse(Int, year_str)
-        month = tryparse(Int, month_str)
-        if month === nothing
-            return missing
+        if length(year_str) == 2
+            if year > 30
+                year += 1900
+            else
+            year += 2000
+            end
         end
         return Date(year, month, day)
     end
 
-    # Match for "dd-mm-yyyy" or "dd/mm/yyyy" format
-    m = match(r"(\d{1,2})[/-](\d{1,2})[/-](\d{4})", date_string)
+    # Match for "dd mm yyyy" or "dd mm yy" format
+    m = match(r"^(\d{1,2}) (\d{1,2}) (\d{2,4})$", date_string)
     if m !== nothing
         day_str, month_str, year_str = m.captures
         day = parse(Int, day_str)
         month = parse(Int, month_str)
         year = parse(Int, year_str)
+        if length(year_str) == 2
+            if year > 30
+                year += 1900
+            else
+            year += 2000
+            end
+        end
+        return Date(year, month, day)
+    end
+
+    # Match for "dd-mm-yyyy", "dd/mm/yyyy", "dd-mm-yy", or "dd/mm/yy" format
+    m = match(r"^(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})$", date_string)
+    if m !== nothing
+        day_str, month_str, year_str = m.captures
+        day = parse(Int, day_str)
+        month = parse(Int, month_str)
+        year = parse(Int, year_str)
+        if length(year_str) == 2
+            if year > 30
+                year += 1900
+            else
+            year += 2000
+            end
+        end
         return Date(year, month, day)
     end
 
     return missing
 end
+
 
 
 """
@@ -145,10 +154,20 @@ function dmy_hm(datetime_string::Union{AbstractString, Missing})
         month = parse(Int, month_str)
         year = parse(Int, year_str)
         hour = parse(Int, hour_str)
-        if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string) 
+        minute = parse(Int, minute_str)
+        if minute == 60
+            @warn "Minute is 60, returning missing"
+            return missing
+        end
+        # Handle AM/PM format
+        if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string)
             hour += 12
         end
-        minute = parse(Int, minute_str)
+
+        # Handle the case when hour is 24 by incrementing the date and setting time to 00:xx
+        if hour == 24
+            return DateTime(year, month, day, 0, minute) + Day(1)
+        end
 
         # Return as DateTime
         return DateTime(year, month, day, hour, minute)
@@ -157,3 +176,4 @@ function dmy_hm(datetime_string::Union{AbstractString, Missing})
     # If no match found, return missing
     return missing
 end
+

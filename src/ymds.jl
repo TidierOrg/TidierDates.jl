@@ -2,6 +2,7 @@
 $docstring_ymd
 """
 function ymd(date_string::Union{AbstractString, Missing})
+
     if ismissing(date_string)
         return missing
     else
@@ -10,31 +11,73 @@ function ymd(date_string::Union{AbstractString, Missing})
         date_string = strip(replace(date_string, r"ST|ND|RD|TH|,|OF|THE" => ""))
         date_string = replace(date_string, r"\s+" => Base.s" ")
     end
-    # Try "yyyymmdd" format
-    m = match(r"(\d{4})(\d{1,2})(\d{1,2})", date_string)
+
+    # Try "yyyymmdd" or "yymmdd" format
+    m = match(r"^(\d{2,4})(\d{1,2})(\d{1,2})$", date_string)
     if m !== nothing
         year_str, month_str, day_str = m.captures
         year = parse(Int, year_str)
+        if length(year_str) == 2
+            if year > 30
+                year += 1900
+            else
+            year += 2000
+            end
+        end
         month = parse(Int, month_str)
         day = parse(Int, day_str)
         return Date(year, month, day)
     end
 
-    # Try "yyyy/mm/dd" and "yyyy-mm-dd" formats
-    m = match(r"(\d{4})[/-](\d{1,2})[/-](\d{1,2})", date_string)
+    # Try "yyyy/mm/dd", "yyyy-mm-dd", "yy/mm/dd", or "yy-mm-dd" formats
+    m = match(r"^(\d{2,4})[/-](\d{1,2})[/-](\d{1,2})$", date_string)
     if m !== nothing
         year_str, month_str, day_str = m.captures
         year = parse(Int, year_str)
+        if length(year_str) == 2
+            if year > 30
+                year += 1900
+            else
+            year += 2000
+            end
+        end
         month = parse(Int, month_str)
         day = parse(Int, day_str)
         return Date(year, month, day)
     end
 
-        # Try "Year Month Day" format
-    m = match(r"(\d{4})\s*(\w+)\s*(\d{1,2})(st|nd|rd|th)?", date_string)
+    # Try "Year Month Day" format (month can be a number or word)
+    m = match(r"^(\d{2,4})\s+(\w+)\s+(\d{1,2})(st|nd|rd|th)?$", date_string)
     if m !== nothing
         year_str, month_str, day_str, _ = m.captures
         year = parse(Int, year_str)
+        if length(year_str) == 2
+            if year > 30
+                year += 1900
+            else
+            year += 2000
+            end
+        end
+        month = tryparse(Int, month_str)
+        if month === nothing
+            month = parse(Int, replace_month_with_number(month_str))
+        end
+        day = parse(Int, day_str)
+        return Date(year, month, day)
+    end
+
+    # Try "yyyy mm dd" or "yy mm dd" format
+    m = match(r"^(\d{2,4})\s+(\d{1,2})\s+(\d{1,2})$", date_string)
+    if m !== nothing
+        year_str, month_str, day_str = m.captures
+        year = parse(Int, year_str)
+        if length(year_str) == 2
+            if year > 30
+                year += 1900
+            else
+            year += 2000
+            end
+        end
         month = parse(Int, month_str)
         day = parse(Int, day_str)
         return Date(year, month, day)
@@ -42,6 +85,7 @@ function ymd(date_string::Union{AbstractString, Missing})
 
     return nothing
 end
+
 
 """
 $docstring_ymd_hms
@@ -98,10 +142,20 @@ function ymd_hm(datetime_string::Union{AbstractString, Missing})
         month = parse(Int, month_str)
         day = parse(Int, day_str)
         hour = parse(Int, hour_str)
+        minute = parse(Int, minute_str)
+        if minute == 60
+            @warn "Minute is 60, returning missing"
+            return missing
+        end
+        # Handle AM/PM format
         if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string)
             hour += 12
         end
-        minute = parse(Int, minute_str)
+
+        # Handle the case when hour is 24 by incrementing the date and setting the time to 00:xx
+        if hour == 24
+            return DateTime(year, month, day, 0, minute) + Day(1)
+        end
 
         # Return as DateTime
         return DateTime(year, month, day, hour, minute)
@@ -110,6 +164,7 @@ function ymd_hm(datetime_string::Union{AbstractString, Missing})
     # If no match found, return missing
     return missing
 end
+
 
 """
 $docstring_ymd_h
