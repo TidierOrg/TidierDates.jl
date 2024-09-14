@@ -83,7 +83,7 @@ function ymd(date_string::Union{AbstractString, Missing})
         return Date(year, month, day)
     end
 
-    return nothing
+    return missing
 end
 
 
