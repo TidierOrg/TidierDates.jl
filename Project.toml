@@ -3,6 +3,7 @@ uuid = "20186a3f-b5d3-468e-823e-77aae96fe2d8"
 authors = ["Daniel Rizk & Contributors"]
 version = "0.2.6"
 
+
 [deps]
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
 Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
