@@ -2,6 +2,7 @@
 $docstring_ymd
 """
 function ymd(date_string::Union{AbstractString, Missing})
+
     if ismissing(date_string)
         return missing
     else

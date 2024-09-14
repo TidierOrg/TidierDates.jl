@@ -19,4 +19,4 @@ In addition, this package includes:
 - `leap_year()`
 - `days_in_month()`
 
-English, Spanish and French month names are supported.
+English, Spanish, Portuguese and French months and abbreviations are supported.

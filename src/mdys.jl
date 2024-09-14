@@ -2,6 +2,7 @@
 $docstring_mdy
 """
 function mdy(date_string::Union{AbstractString, Missing})
+
     if ismissing(date_string)
         return missing
     else
@@ -10,6 +11,7 @@ function mdy(date_string::Union{AbstractString, Missing})
         date_string = strip(replace(date_string, r"THE|ST|ND|RD|TH|,|OF |THE" => ""))
         date_string = replace(date_string, r"\s+" => Base.s" ")
     end
+    
 
     # Add new regex match for "m d yy" or "mm dd yyyy" format
     m = match(r"(\d{1,2})\s+(\d{1,2})\s+(\d{2,4})", date_string)

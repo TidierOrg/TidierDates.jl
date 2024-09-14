@@ -30,7 +30,7 @@ julia> mdy("01 24 2023")
 julia> mdy(missing)
 missing
 
-julia> mdy("FÉVRIER 20 2020")
+julia> mdy("FÉVRIER 20 2020") # French
 2020-02-20
 ```
 """
@@ -67,8 +67,12 @@ julia> dmy("3rd of December, 2020")
 julia> dmy(missing)
 missing
 
-julia> dmy("20 DICIEMBRE 2020")
+julia> dmy("20 DICIEMBRE 2020") # Spanish
 2020-12-20
+
+julia> dmy("21 MARÇO 2014") # Portuguese 
+2014-03-21
+
 ```
 """
 
