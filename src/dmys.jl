@@ -10,52 +10,61 @@ function dmy(date_string::Union{AbstractString, Missing})
         date_string = strip(replace(date_string, r"ST|ND|RD|TH|,|OF|THE" => ""))
         date_string = replace(date_string, r"\s+" => Base.s" ")
     end
-    
-    # Match for "ddmmyyyy" format
-    m = match(r"(\d{1,2})(\d{1,2})(\d{4})", date_string)
+
+    # Match for "ddmmyyyy" or "ddmmyy" format
+    m = match(r"^(\d{1,2})(\d{1,2})(\d{2,4})$", date_string)
     if m !== nothing
         day_str, month_str, year_str = m.captures
         day = parse(Int, day_str)
         month = parse(Int, month_str)
         year = parse(Int, year_str)
-        return Date(year, month, day)
-    end
-
-    # Match for "dd Month yyyy" format
-    m = match(r"(\d{1,2}) (\d{1,2}) (\d{4})", date_string)
-    if m !== nothing
-        day_str, month_str, year_str = m.captures
-        day = parse(Int, day_str)
-        month = parse(Int, month_str)
-        year = parse(Int, year_str)
-        return Date(year, month, day)
-    end
-
-    # Match for "Month dd, yyyy" format
-    m = match(r"(\d{1,2})(ST|ND|RD|TH)?\s*(\w+)\s*(\d{4})", date_string)
-    if m !== nothing
-        day_str, _, month_str, year_str = m.captures
-        day = parse(Int, day_str)
-        year = parse(Int, year_str)
-        month = tryparse(Int, month_str)
-        if month === nothing
-            return missing
+        if length(year_str) == 2
+            if year > 30
+                year += 1900
+            else
+            year += 2000
+            end
         end
         return Date(year, month, day)
     end
 
-    # Match for "dd-mm-yyyy" or "dd/mm/yyyy" format
-    m = match(r"(\d{1,2})[/-](\d{1,2})[/-](\d{4})", date_string)
+    # Match for "dd mm yyyy" or "dd mm yy" format
+    m = match(r"^(\d{1,2}) (\d{1,2}) (\d{2,4})$", date_string)
     if m !== nothing
         day_str, month_str, year_str = m.captures
         day = parse(Int, day_str)
         month = parse(Int, month_str)
         year = parse(Int, year_str)
+        if length(year_str) == 2
+            if year > 30
+                year += 1900
+            else
+            year += 2000
+            end
+        end
+        return Date(year, month, day)
+    end
+
+    # Match for "dd-mm-yyyy", "dd/mm/yyyy", "dd-mm-yy", or "dd/mm/yy" format
+    m = match(r"^(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})$", date_string)
+    if m !== nothing
+        day_str, month_str, year_str = m.captures
+        day = parse(Int, day_str)
+        month = parse(Int, month_str)
+        year = parse(Int, year_str)
+        if length(year_str) == 2
+            if year > 30
+                year += 1900
+            else
+            year += 2000
+            end
+        end
         return Date(year, month, day)
     end
 
     return missing
 end
+
 
 
 """

@@ -18,3 +18,5 @@ In addition, this package includes:
 - `am()`, `pm()`
 - `leap_year()`
 - `days_in_month()`
+
+English, Spanish and French month names are supported.

@@ -37,7 +37,7 @@ Pkg.add(url = "https://github.com/TidierOrg/TidierDates.jl.git")
 
 #### `mdy()`, `dmy()`, `ymd()`
 
-These functions parse dates represented as strings into a DateTime format in Julia. The input should be a string month-day-year, day-month-year, or year-month-day format respectively. They are relatively robust in their ability to take non-uniform strings of dates. 
+These functions parse dates represented as strings into a DateTime format in Julia. The input should be a string month-day-year, day-month-year, or year-month-day format respectively. They are relatively robust in their ability to take non-uniform strings of dates. English, Spanish and French month names are supported.
 
 ```julia
 using TidierData
