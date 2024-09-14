@@ -102,7 +102,9 @@ function mdy_hms(datetime_string::Union{AbstractString, Missing})
         minute = parse(Int, minute_str)
         second = parse(Int, second_str)
 
-        # Return as DateTime
+    if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string)
+        hour += 12
+    end   # Return as DateTime
         return DateTime(year, month, day, hour, minute, second)
     end
 
