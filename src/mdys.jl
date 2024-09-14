@@ -92,8 +92,12 @@ function mdy_hms(datetime_string::Union{AbstractString, Missing})
         month = parse(Int, month_str)
         day = parse(Int, day_str)
         hour = parse(Int, hour_str)
-        if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string) 
-            hour += 12
+        if length(year_str) == 2
+            if year > 30
+                year += 1900
+            else
+            year += 2000
+            end
         end
         minute = parse(Int, minute_str)
         second = parse(Int, second_str)
