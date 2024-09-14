@@ -146,10 +146,10 @@ function mdy_hm(datetime_string::Union{AbstractString, Missing})
         # Handle the case when hour is 24 by incrementing the date and setting time to 00:xx
         if hour == 24
             return DateTime(year, month, day, 0, minute) + Day(1)
+    
+        else
+           return DateTime(year, month, day, hour, minute)
         end
-
-        # Return as DateTime
-        return DateTime(year, month, day, hour, minute)
     end
 
     # If no match found, return missing
@@ -181,9 +181,12 @@ function mdy_h(datetime_string::Union{AbstractString, Missing})
         if hour <= 12 && occursin(r"(?<![A-Za-z])[Pp](?:[Mm])?(?![A-Za-z])", datetime_string)
             hour += 12
         end
-
-        # Return as DateTime
-        return DateTime(year, month, day, hour)
+        if hour == 24
+            return DateTime(year, month, day, 0) + Day(1)
+    
+        else
+           return DateTime(year, month, day, hour)
+        end
     end
 
     # If no match found, return missing

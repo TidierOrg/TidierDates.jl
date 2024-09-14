@@ -139,13 +139,11 @@ function dmy_hm(datetime_string::Union{AbstractString, Missing})
             hour += 12
         end
 
-        # Handle the case when hour is 24 by incrementing the date and setting time to 00:xx
         if hour == 24
             return DateTime(year, month, day, 0, minute) + Day(1)
-        end
-
-        # Return as DateTime
+        else
         return DateTime(year, month, day, hour, minute)
+        end
     end
 
     # If no match found, return missing
