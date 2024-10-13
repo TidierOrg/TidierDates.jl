@@ -173,7 +173,7 @@ Round a DateTime, Date, or Time object to the nearest specified unit.
 
 # Arguments
 `dt`: A DateTime, Date, or Time object (can contain missing values in a DataFrame).
-`unit`: A string specifying the units to use for rounding. The units can be one of the following: "year", "month", "day", "hour", "minute", "second".
+`unit`: A string specifying the units to use for rounding. The units can be one of the following: "year", "quarter", "month", "day", "hour", "minute", "second".
 
 # Returns
 The DateTime, Date, or Time object rounded to the nearest specified unit. If the input is missing, the function returns a missing value.
