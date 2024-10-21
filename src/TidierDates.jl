@@ -67,6 +67,8 @@ function floor_date(dt::Union{DateTime, Date, Time, Missing}, unit::String)
 
     if unit == "year"
         return floor(dt, Year)
+    elseif unit == "quarter"
+        return floor(dt, Quarter)
     elseif unit == "month"
         return floor(dt, Month)
     elseif unit == "week"
@@ -84,7 +86,7 @@ function floor_date(dt::Union{DateTime, Date, Time, Missing}, unit::String)
     elseif unit == "minute"
         return floor(dt, Minute)
     else
-        throw(ArgumentError("Unit must be one of 'year', 'month', 'week', 'day', 'hour', or 'minute'."))
+        throw(ArgumentError("Unit must be one of 'year', 'quarter', 'month', 'week', 'day', 'hour', or 'minute'."))
     end
 end
 
@@ -100,6 +102,8 @@ function round_date(dt::Union{DateTime, Date, Time, Missing}, unit::String)
     if dt isa DateTime || dt isa Date
         if unit == "year"
             return round(dt, Year)
+        elseif unit == "quarter"
+            return round(dt, Quarter)
         elseif unit == "month"
             return round(dt, Month)
         elseif unit == "day"
@@ -112,7 +116,7 @@ function round_date(dt::Union{DateTime, Date, Time, Missing}, unit::String)
             elseif unit == "second"
                 return round(dt, Second)
             else
-                throw(ArgumentError("Unit must be one of 'year', 'month', 'day', 'hour', 'minute', 'second'."))
+                throw(ArgumentError("Unit must be one of 'year', 'quarter', 'month', 'day', 'hour', 'minute', 'second'."))
             end
         else
             throw(ArgumentError("Unit must be one of 'year', 'month', 'day'."))

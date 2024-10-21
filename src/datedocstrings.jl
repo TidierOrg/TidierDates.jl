@@ -136,7 +136,7 @@ Round down a DateTime object to the nearest specified unit.
 
 # Arguments
 `dt`: A DateTime object (can contain missing values in a DataFrame).
-`unit`: A string specifying the units to use for rounding down. The units can be one of the following: "year", "month", "week", "day", "hour", "minute".
+`unit`: A string specifying the units to use for rounding down. The units can be one of the following: "year", "quarter", "month", "week", "day", "hour", "minute".
 
 # Returns
 The DateTime object rounded down to the nearest specified unit. If the input is missing, the function returns a missing value.
@@ -157,6 +157,9 @@ julia> floor_date(dt, "day")
 julia> floor_date(dt, "week")
 2023-06-11T00:00:00
 
+julia> floor_date(dt, "quarter")
+2023-04-01T00:00:00
+
 julia> floor_date(missing, "day")
 missing
 ```
@@ -170,7 +173,7 @@ Round a DateTime, Date, or Time object to the nearest specified unit.
 
 # Arguments
 `dt`: A DateTime, Date, or Time object (can contain missing values in a DataFrame).
-`unit`: A string specifying the units to use for rounding. The units can be one of the following: "year", "month", "day", "hour", "minute", "second".
+`unit`: A string specifying the units to use for rounding. The units can be one of the following: "year", "quarter", "month", "day", "hour", "minute", "second".
 
 # Returns
 The DateTime, Date, or Time object rounded to the nearest specified unit. If the input is missing, the function returns a missing value.
@@ -185,6 +188,9 @@ julia> round_date(dt, "hour")
 
 julia> round_date(dt, "day")
 2023-06-15T00:00:00
+
+julia> round_date(dt, "quarter")
+2023-07-01T00:00:00
 
 julia> round_date(missing, "day")
 missing
