@@ -1,7 +1,7 @@
 name = "TidierDates"
 uuid = "20186a3f-b5d3-468e-823e-77aae96fe2d8"
 authors = ["Daniel Rizk & Contributors"]
-version = "0.2.6"
+version = "0.3.0"
 
 
 [deps]
@@ -12,7 +12,7 @@ TimeZones = "f269a46b-ccf7-5d73-abea-4c690281aa53"
 [compat]
 Reexport = "0.2, 1"
 TimeZones = "1.17"
-julia = "1.9"
+julia = "1.10"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
