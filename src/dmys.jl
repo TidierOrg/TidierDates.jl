@@ -2,7 +2,6 @@
 $docstring_dmy
 """
 function dmy(dates_mdy)
-   # println("here")
     if isa(dates_mdy, AbstractVector)
         date_string = dates_mdy[1]
     else
@@ -23,7 +22,6 @@ function dmy(dates_mdy)
     try
         return Date.(dates_mdy, format)
     catch
-     #   println("hereeeee")
         return dmy2.(dates_mdy)
     end
 end

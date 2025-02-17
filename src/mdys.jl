@@ -2,7 +2,6 @@
 $docstring_mdy
 """
 function mdy(dates_mdy)
-    # println("here")
      if isa(dates_mdy, AbstractVector)
          date_string = dates_mdy[1]
      else
