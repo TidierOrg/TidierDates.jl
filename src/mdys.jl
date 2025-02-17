@@ -1,7 +1,35 @@
 """
 $docstring_mdy
 """
-function mdy(date_string::Union{AbstractString, Missing})
+function mdy(dates_mdy)
+    # println("here")
+     if isa(dates_mdy, AbstractVector)
+         date_string = dates_mdy[1]
+     else
+         date_string = dates_mdy
+     end
+     format = ""
+     if !ismissing(date_string)
+        if occursin(r"^\d{2}-\d{2}-\d{4}$", date_string)
+            format = "mm-dd-yyyy"
+        elseif occursin(r"^\d{2}/\d{2}/\d{4}$", date_string)
+            format = "mm/dd/yyyy"
+        elseif any(occursin(month, uppercase.(date_string)) for month in abbrev_months)
+            format = "u dd yyyy"
+        elseif any(occursin(month, uppercase(date_string)) for month in full_month)
+            format = "U dd yyyy"
+        else
+            format = "mm/dd/yyyy"
+        end
+    end
+     try
+         return Date.(dates_mdy, format)
+     catch
+         return mdy2.(dates_mdy)
+     end
+ end
+
+function mdy2(date_string::Union{AbstractString, Missing})
 
     if ismissing(date_string)
         return missing
@@ -74,7 +102,47 @@ end
 """
 $docstring_mdy_hms
 """
-function mdy_hms(datetime_string::Union{AbstractString, Missing})
+function mdy_hms(dates_mdy)
+    # Check if the input is a vector and take the first element
+    if isa(dates_mdy, AbstractVector)
+        date_string = dates_mdy[1]
+    else
+        date_string = dates_mdy
+    end
+    format = ""
+    if !ismissing(date_string)
+        if occursin(r"^[a-z]{3,4}\s\d{1,2}\s\d{4}\s\d{2}:\d{2}:\d{2}\s[a-z]{1,2}$", date_string)
+            format = "u dd yyyy HH:MM:SS p"
+        elseif endswith(date_string, r"[AaPp][Mm]")
+            if occursin("-", date_string)
+                if occursin(r"\d{2}:\d{2}:\d{2} [AaPp][Mm]", date_string)
+                    format = "mm-dd-yyyy HH:MM:SS p"
+                else
+                    format = "mm-dd-yyyy HH:MM:SSp"
+                end
+            else
+                if occursin(r"\d{2}:\d{2}:\d{2} [AaPp][Mm]", date_string)
+                    format = "mm/dd/yyyy HH:MM:SS p"
+                else
+                    format = "mm/dd/yyyy HH:MM:SSp"
+                end
+            end
+        else
+            if occursin("-", date_string)
+                format = "mm-dd-yyyy HH:MM:SS"
+            else
+                format = "mm/dd/yyyy HH:MM:SS"
+            end
+        end
+    end
+    try
+        return DateTime.(dates_mdy, format)
+    catch
+        return mdy_hms2.(dates_mdy)
+    end
+end
+
+function mdy_hms2(datetime_string::Union{AbstractString, Missing})
 
     if ismissing(datetime_string)
         return missing

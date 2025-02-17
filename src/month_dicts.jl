@@ -32,3 +32,73 @@ abbreviated_month_to_num = Dict{String, Int}(
     "SEP" => 9, "OCT" => 10, "NOV" => 11, "DÉC" => 12,
     #portugues
 )
+
+# All full month names across languages
+full_month = [
+    "JANUARY", "FEBUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", 
+    "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER",
+    "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO",
+    "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE",
+    "JANVIER", "FEVRIER", "FÉVRIER", "MARS", "AVRIL", "MAI", "JUIN", 
+    "JUILLET", "AOÛT", "AOUT", "SEPTEMBRE", "OCTOBRE", "NOVEMBRE", 
+    "DÉCEMBRE", "DECEMBRE",
+    "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO",
+    "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
+]
+
+# All abbreviated month names across languages
+abbrev_months = [
+    "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", 
+    "AUG", "SEP", "OCT", "NOV", "DEC",
+    "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL",
+    "AGO", "SEP", "OCT", "NOV", "DIC",
+    "JAN", "FÉV", "MAR", "AVR", "MAI", "JUI", "JUIL",
+    "AOÛ", "AOU", "SEP", "OCT", "NOV", "DÉC",
+    "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL",
+    "AGO", "SET", "OUT", "NOV", "DEZ"
+]
+
+
+# Arrays of month names in different languages
+english_months = [
+    "JANUARY", "FEBUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", 
+    "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+]
+
+spanish_months = [
+    "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO",
+    "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"
+]
+
+french_months = [
+    "JANVIER", "FEVRIER", "FÉVRIER", "MARS", "AVRIL", "MAI", "JUIN", 
+    "JUILLET", "AOÛT", "AOUT", "SEPTEMBRE", "OCTOBRE", "NOVEMBRE", 
+    "DÉCEMBRE", "DECEMBRE"
+]
+
+portuguese_months = [
+    "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO",
+    "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
+]
+
+# Arrays for abbreviated month names
+english_months_abbr = [
+    "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", 
+    "AUG", "SEP", "OCT", "NOV", "DEC"
+]
+
+spanish_months_abbr = [
+    "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL",
+    "AGO", "SEP", "OCT", "NOV", "DIC"
+]
+
+french_months_abbr = [
+    "JAN", "FÉV", "MAR", "AVR", "MAI", "JUI", "JUIL",
+    "AOÛ", "AOU", "SEP", "OCT", "NOV", "DÉC"
+]
+
+portuguese_months_abbr = [
+    "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL",
+    "AGO", "SET", "OUT", "NOV", "DEZ"
+]
+
