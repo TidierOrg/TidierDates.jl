@@ -2,21 +2,17 @@
 $docstring_ymd
 """
 function ymd(dates_mdy)
-    if isa(dates_mdy, AbstractVector)
-        date_string = dates_mdy[1]
-    else
-        date_string = dates_mdy
-    end
+    date_string = dates_mdy
     format = ""
     if !ismissing(date_string)
         if occursin(r"^\d{4}-\d{2}-\d{2}$", date_string)
             format = "yyyy-mm-dd"
         elseif occursin(r"^\d{8}$", date_string)  # Check for yyyymmdd format
             format = "yyyymmdd"
-        elseif any(occursin(month, uppercase(date_string)) for month in abbrev_months)
-            format = "yyyy u dd"
         elseif any(occursin(month, uppercase(date_string)) for month in full_month)
             format = "yyyy U dd"
+        elseif any(occursin(month, uppercase(date_string)) for month in abbrev_months)
+            format = "yyyy u dd"
         else
             format = "yyyy/mm/dd"
         end

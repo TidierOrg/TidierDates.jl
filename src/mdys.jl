@@ -13,10 +13,10 @@ function mdy(dates_mdy)
             format = "mm-dd-yyyy"
         elseif occursin(r"^\d{2}/\d{2}/\d{4}$", date_string)
             format = "mm/dd/yyyy"
-        elseif any(occursin(month, uppercase.(date_string)) for month in abbrev_months)
-            format = "u dd yyyy"
-        elseif any(occursin(month, uppercase(date_string)) for month in full_month)
+        elseif any(occursin(month, uppercase.(date_string)) for month in full_month)
             format = "U dd yyyy"
+        elseif any(occursin(month, uppercase(date_string)) for month in abbrev_months)
+            format = "u dd yyyy"
         else
             format = "mm/dd/yyyy"
         end
@@ -135,7 +135,7 @@ function mdy_hms(dates_mdy)
         end
     end
     try
-        return DateTime.(dates_mdy, format)
+        return DateTime.(dates_mdy, format, locale = lang)
     catch
         return mdy_hms2.(dates_mdy)
     end

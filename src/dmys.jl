@@ -13,14 +13,14 @@ function dmy(dates_mdy)
             format = "dd-mm-yyyy"
         elseif occursin(r"^\d{2}/\d{2}/\d{4}$", date_string)
             format = "dd/mm/yyyy"
-        elseif any(occursin(month, uppercase(date_string)) for month in abbrev_months)
-            format = "dd u yyyy"
         elseif any(occursin(month, uppercase(date_string)) for month in full_month)
             format = "dd U yyyy"
+        elseif any(occursin(month, uppercase(date_string)) for month in abbrev_months)
+            format = "dd u yyyy"
         end
     end
     try
-        return Date.(dates_mdy, format)
+        return Date.(dates_mdy, format, locale=lang)
     catch
         return dmy2.(dates_mdy)
     end

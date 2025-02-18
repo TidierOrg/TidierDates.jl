@@ -66,13 +66,6 @@ julia> dmy("3rd of December, 2020")
 
 julia> dmy(missing)
 missing
-
-julia> dmy("20 DICIEMBRE 2020") # Spanish
-2020-12-20
-
-julia> dmy("21 MARÇO 2014") # Portuguese 
-2014-03-21
-
 ```
 """
 
@@ -627,4 +620,50 @@ julia> hm("09:30")
 julia> hm("12:60")
 missing
 ```
+"""
+
+
+"""
+    set_lang(lang_str::AbstractString)
+
+Set the global language configuration for date parsing and formatting based on a language name.
+
+This function updates the global variables `full_month`, `abbrev_months`, `days_of_week`, and `lang`
+to match the specified language. It also updates the corresponding locale in `Dates.LOCALES`.
+Default supported languages are `"english"`, `"spanish"`, `"french"`, and `"portuguese"`.
+
+# Arguments
+- `lang_str::AbstractString`: The language identifier as a string (e.g., `"english"`, `"spanish"`, etc.).
+
+# Examples
+```jldoctest
+julia> set_lang("french");
+
+julia> dmy("20 janvier 2020")
+2020-01-20
+
+julia> set_lang("spanish")
+
+julia> dmy("20 diciembre 2020")
+2020-12-20
+
+julia> set_lang("portuguese")
+
+julia> dmy("21 MARÇO 2014") # Portuguese 
+2014-03-21
+```
+"""
+
+"""
+     set_lang(language::String, full_months::AbstractVector{<:AbstractString}, abbrev_months::AbstractVector{<:AbstractString}, days::AbstractVector{<:AbstractString})
+
+Set a custom language configuration for date parsing and formatting by directly providing arrays of names.
+
+This method updates the locale for the given language key in Dates.LOCALES using the specified arrays of full month names, abbreviated month names, and day names.
+
+Arguments
+- `language`: A string of the language name.
+- `full_months`::AbstractVector{<:AbstractString}`: An array of strings containing the full month names.
+- `abbrev_months::AbstractVector{<:AbstractString}`: An array containing the abbreviated month names.
+- `days::AbstractVector{<:AbstractString}`: An array containing the day names.
 """
