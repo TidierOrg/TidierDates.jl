@@ -7,7 +7,7 @@ function ymd(dates_mdy)
     if !ismissing(date_string)
         if occursin(r"^\d{4}-\d{2}-\d{2}$", date_string)
             format = "yyyy-mm-dd"
-        elseif occursin(r"^\d{8}$", date_string)  # Check for yyyymmdd format
+        elseif occursin(r"^\d{8}$", date_string)  
             format = "yyyymmdd"
         elseif any(occursin(month, uppercase(date_string)) for month in full_month)
             format = "yyyy U dd"
@@ -17,10 +17,18 @@ function ymd(dates_mdy)
             format = "yyyy/mm/dd"
         end
     end
-    try
-        return Date.(dates_mdy, format)
-    catch
-        return ymd2.(dates_mdy)
+    if lang == "english"
+        try
+            return Date.(dates_mdy, format)
+        catch
+            return ymd2.(dates_mdy)
+        end
+    else
+        try
+            return Date.(dates_mdy, format, locale = lang)
+        catch
+            return ymd2.(dates_mdy)
+        end
     end
 end
 
@@ -114,12 +122,7 @@ end
 $docstring_ymd_hms
 """
 function ymd_hms(dates_mdy)
-    # Check if the input is a vector and take the first element
-    if isa(dates_mdy, AbstractVector)
-        date_string = dates_mdy[1]
-    else
-        date_string = dates_mdy
-    end
+    date_string = dates_mdy
     format = ""
     if !ismissing(date_string)
         if endswith(date_string, r"[AaPp][Mm]")
@@ -144,10 +147,18 @@ function ymd_hms(dates_mdy)
             end
         end
     end
-    try
-        return DateTime.(dates_mdy, format)
-    catch
-        return ymd_hms2.(dates_mdy)
+    if lang == "english"
+        try
+            return DateTime.(dates_mdy, format)
+        catch
+            return ymd_hms2.(dates_mdy)
+        end
+    else
+        try
+            return DateTime.(dates_mdy, format, locale = lang)
+        catch
+            return ymd_hms2.(dates_mdy)
+        end
     end
 end
 

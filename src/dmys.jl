@@ -2,29 +2,29 @@
 $docstring_dmy
 """
 function dmy(dates_mdy)
-    if isa(dates_mdy, AbstractVector)
-        date_string = dates_mdy[1]
-    else
-        date_string = dates_mdy
-    end
-    format = ""
-    if !ismissing(date_string)
-        if occursin(r"^\d{2}[-/]\d{2}[-/]\d{4}$", date_string)
+    date_string = dates_mdy
+     format = ""
+     if !ismissing(date_string)
+        if occursin(r"^\d{2}[-]\d{2}[-]\d{4}$", date_string)
             format = "dd-mm-yyyy"
-        elseif occursin(r"^\d{2}/\d{2}/\d{4}$", date_string)
-            format = "dd/mm/yyyy"
-        elseif any(occursin(month, uppercase(date_string)) for month in full_month)
-            format = "dd U yyyy"
-        elseif any(occursin(month, uppercase(date_string)) for month in abbrev_months)
-            format = "dd u yyyy"
+        elseif occursin(r"^\d{2}[\/]\d{2}[\/]\d{4}$", date_string)
+            format = "dd/mm/yyyy"        
+         elseif any(occursin(month, uppercase(date_string)) for month in full_month)
+             format = "dd U yyyy"
+         elseif any(occursin(month, uppercase(date_string)) for month in abbrev_months)
+             format = "dd u yyyy"
+         end
+     end
+     try
+        if lang == "english"
+              return Date.(dates_mdy, format)
+        else 
+            return Date.(dates_mdy, format, locale = lang)
         end
-    end
-    try
-        return Date.(dates_mdy, format, locale=lang)
-    catch
-        return dmy2.(dates_mdy)
-    end
-end
+     catch
+         return dmy2.(dates_mdy)
+     end
+ end
 
 function dmy2(date_string::Union{AbstractString, Missing})
     if ismissing(date_string)
@@ -106,25 +106,20 @@ end
 $docstring_dmy_hms
 """
 function dmy_hms(dates_mdy)
-    # Check if the input is a vector and take the first element
-    if isa(dates_mdy, AbstractVector)
-        date_string = dates_mdy[1]
-    else
-        date_string = dates_mdy
-    end
+    date_string = dates_mdy
     format = ""
     if !ismissing(date_string)
         if occursin(r"^\d{1,2}\s[a-z]{2,4}\s\d{4}\s\d{2}:\d{2}:\d{2}\s[a-z]{1,2}$", date_string)
             format = "dd u yyyy HH:MM:SS p"
-        elseif endswith(date_string, r"[AaPp][Mm]")
+        elseif occursin(r"[AaPp][Mm]$", date_string)
             if occursin("-", date_string)
-                if occursin(r"\d{2}:\d{2}:\d{2} [AaPp][Mm]", date_string)
+                if occursin(r"\d{2}:\d{2}:\d{2} [AaPp][Mm]$", date_string)
                     format = "dd-mm-yyyy HH:MM:SS p"
                 else
                     format = "dd-mm-yyyy HH:MM:SSp"
                 end
             else
-                if occursin(r"\d{2}:\d{2}:\d{2} [AaPp][Mm]", date_string)
+                if occursin(r"\d{2}:\d{2}:\d{2} [AaPp][Mm]$", date_string)
                     format = "dd/mm/yyyy HH:MM:SS p"
                 else
                     format = "dd/mm/yyyy HH:MM:SSp"
@@ -136,12 +131,20 @@ function dmy_hms(dates_mdy)
             else
                 format = "dd/mm/yyyy HH:MM:SS"
             end
-        end
+        end        
     end
-    try
-        return DateTime.(dates_mdy, format)
-    catch
-        return dmy_hms2.(dates_mdy)
+    if lang == "english"
+        try
+            return DateTime.(dates_mdy, format)
+        catch
+            return dmy_hms2.(dates_mdy)
+        end
+    else
+        try
+            return DateTime.(dates_mdy, format, locale = lang)
+        catch
+            return dmy_hms2.(dates_mdy)
+        end
     end
 end
 

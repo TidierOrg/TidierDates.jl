@@ -2,16 +2,12 @@
 $docstring_mdy
 """
 function mdy(dates_mdy)
-     if isa(dates_mdy, AbstractVector)
-         date_string = dates_mdy[1]
-     else
-         date_string = dates_mdy
-     end
+    date_string = dates_mdy
      format = ""
      if !ismissing(date_string)
-        if occursin(r"^\d{2}-\d{2}-\d{4}$", date_string)
+        if occursin(r"^\d{2}[-]\d{2}[-]\d{4}$", date_string)
             format = "mm-dd-yyyy"
-        elseif occursin(r"^\d{2}/\d{2}/\d{4}$", date_string)
+        elseif occursin(r"^\d{2}[\/]\d{2}[\/]\d{4}$", date_string)
             format = "mm/dd/yyyy"
         elseif any(occursin(month, uppercase.(date_string)) for month in full_month)
             format = "U dd yyyy"
@@ -21,11 +17,19 @@ function mdy(dates_mdy)
             format = "mm/dd/yyyy"
         end
     end
-     try
-         return Date.(dates_mdy, format)
-     catch
-         return mdy2.(dates_mdy)
-     end
+    if lang == "english"
+        try
+            return Date.(dates_mdy, format)
+        catch
+            return mdy2.(dates_mdy)
+        end
+    else
+        try
+            return Date.(dates_mdy, format, locale = lang)
+        catch
+            return mdy2.(dates_mdy)
+        end
+    end
  end
 
 function mdy2(date_string::Union{AbstractString, Missing})
@@ -103,11 +107,7 @@ $docstring_mdy_hms
 """
 function mdy_hms(dates_mdy)
     # Check if the input is a vector and take the first element
-    if isa(dates_mdy, AbstractVector)
-        date_string = dates_mdy[1]
-    else
-        date_string = dates_mdy
-    end
+    date_string = dates_mdy
     format = ""
     if !ismissing(date_string)
         if occursin(r"^[a-z]{3,4}\s\d{1,2}\s\d{4}\s\d{2}:\d{2}:\d{2}\s[a-z]{1,2}$", date_string)
@@ -134,10 +134,18 @@ function mdy_hms(dates_mdy)
             end
         end
     end
-    try
-        return DateTime.(dates_mdy, format, locale = lang)
-    catch
-        return mdy_hms2.(dates_mdy)
+    if lang == "english"
+        try
+            return DateTime.(dates_mdy, format)
+        catch
+            return mdy_hms2.(dates_mdy)
+        end
+    else
+        try
+            return DateTime.(dates_mdy, format, locale = lang)
+        catch
+            return mdy_hms2.(dates_mdy)
+        end
     end
 end
 
