@@ -1,4 +1,102 @@
-#### Create dictionaries to map full and abbreviated month names to numbers
+# Define your language-specific arrays (these can be defined elsewhere)
+english_months = [
+    "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", 
+    "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+]
+english_months_abbr = [
+    "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", 
+    "AUG", "SEP", "OCT", "NOV", "DEC"
+]
+
+spanish_months = [
+    "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO",
+    "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"
+]
+spanish_months_abbr = [
+    "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL",
+    "AGO", "SEP", "OCT", "NOV", "DIC"
+]
+days_of_week_spanish = ["LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMINGO"]
+
+french_months = [
+    "JANVIER", "FEVRIER", "FÉVRIER", "MARS", "AVRIL", "MAI", "JUIN", 
+    "JUILLET", "AOÛT", "AOUT", "SEPTEMBRE", "OCTOBRE", "NOVEMBRE", 
+    "DÉCEMBRE", "DECEMBRE"
+]
+french_months_abbr = [
+    "JAN", "FÉV", "MAR", "AVR", "MAI", "JUI", "JUIL",
+    "AOÛ", "AOU", "SEP", "OCT", "NOV", "DÉC"
+]
+days_of_week_french = ["LUNDI", "MARDI", "MERCREDI", "JEUDI", "VENDREDI", "SAMEDI", "DIMANCHE"]
+
+portuguese_months = [
+    "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO",
+    "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
+]
+portuguese_months_abbr = [
+    "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL",
+    "AGO", "SET", "OUT", "NOV", "DEZ"
+]
+days_of_week_portuguese = [
+    "SEGUNDA-FEIRA", "TERÇA-FEIRA", "QUARTA-FEIRA", 
+    "QUINTA-FEIRA", "SEXTA-FEIRA", "SÁBADO", "DOMINGO"
+]
+english_days_of_week = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
+langa = []
+# Set up globals (initially default to English)
+global full_monthg = english_months
+global abbrev_monthsg = english_months_abbr
+global days_of_weekg = english_days_of_week
+global lang = "english"
+
+function set_lang(lang_str::AbstractString)
+    global full_month, abbrev_months, days_of_week, lang
+    lang_lower = lowercase(lang_str)
+    if lang_lower == "english"
+         full_month   = english_months
+         abbrev_months = english_months_abbr
+         days_of_week =  english_days_of_week
+         Dates.LOCALES["english"] = Dates.DateLocale(english_months, english_months, english_months_abbr, [""])
+         lang = lang_lower
+    elseif lang_lower == "spanish"
+         full_month   = spanish_months
+         abbrev_months = spanish_months_abbr
+         days_of_week = days_of_week_spanish
+         Dates.LOCALES["spanish"] = Dates.DateLocale(spanish_months, spanish_months, spanish_months_abbr, [""])
+         lang = lang_lower
+    elseif lang_lower == "french"
+         full_month   = french_months
+         abbrev_months = french_months_abbr
+         days_of_week = days_of_week_french
+         Dates.LOCALES["french"] = Dates.DateLocale(french_months, french_months, french_months_abbr, [""])
+         lang = lang_lower
+    elseif lang_lower == "portuguese"
+         full_month   = portuguese_months
+         abbrev_months = portuguese_months_abbr
+         days_of_week = days_of_week_portuguese
+         Dates.LOCALES["portuguese"] = Dates.DateLocale(portuguese_months, portuguese_months, portuguese_months_abbr, [""])
+         lang = lang_lower
+    else
+         error("Language '$lang_str' not supported")
+    end
+    return nothing
+end
+
+function set_lang(language, full_months_arr::AbstractVector{<:AbstractString}, 
+                  abbrev_months_arr::AbstractVector{<:AbstractString}, 
+                  days_arr::AbstractVector{<:AbstractString})
+    global full_month, abbrev_months, days_of_week, lang
+    Dates.LOCALES[language] = Dates.DateLocale(full_months_arr, abbrev_months_arr, days_arr, [""])
+    full_month   = full_months_arr
+    abbrev_months = abbrev_months_arr
+    days_of_week = days_arr
+    lang = language
+    return nothing
+end
+export set_lang
+
+
+#### For fall back functions
 full_month_to_num = Dict{String, Int}(
     "JANUARY" => 1, "FEBUARY" => 2, "MARCH" => 3, "APRIL" => 4,
     "MAY" => 5, "JUNE" => 6, "JULY" => 7, "AUGUST" => 8,
@@ -32,3 +130,29 @@ abbreviated_month_to_num = Dict{String, Int}(
     "SEP" => 9, "OCT" => 10, "NOV" => 11, "DÉC" => 12,
     #portugues
 )
+
+# All full month names across languages
+full_month = [
+    "JANUARY", "FEBUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", 
+    "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER",
+    "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO",
+    "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE",
+    "JANVIER", "FEVRIER", "FÉVRIER", "MARS", "AVRIL", "MAI", "JUIN", 
+    "JUILLET", "AOÛT", "AOUT", "SEPTEMBRE", "OCTOBRE", "NOVEMBRE", 
+    "DÉCEMBRE", "DECEMBRE",
+    "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO", "JULHO",
+    "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
+]
+
+# All abbreviated month names across languages
+abbrev_months = [
+    "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", 
+    "AUG", "SEP", "OCT", "NOV", "DEC",
+    "ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL",
+    "AGO", "SEP", "OCT", "NOV", "DIC",
+    "JAN", "FÉV", "MAR", "AVR", "MAI", "JUI", "JUIL",
+    "AOÛ", "AOU", "SEP", "OCT", "NOV", "DÉC",
+    "JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL",
+    "AGO", "SET", "OUT", "NOV", "DEZ"
+]
+

@@ -1,7 +1,38 @@
 """
 $docstring_ymd
 """
-function ymd(date_string::Union{AbstractString, Missing})
+function ymd(dates_mdy)
+    date_string = dates_mdy
+    format = ""
+    if !ismissing(date_string)
+        if occursin(r"^\d{4}-\d{2}-\d{2}$", date_string)
+            format = "yyyy-mm-dd"
+        elseif occursin(r"^\d{8}$", date_string)  
+            format = "yyyymmdd"
+        elseif any(occursin(month, uppercase(date_string)) for month in full_month)
+            format = "yyyy U dd"
+        elseif any(occursin(month, uppercase(date_string)) for month in abbrev_months)
+            format = "yyyy u dd"
+        else
+            format = "yyyy/mm/dd"
+        end
+    end
+    if lang == "english"
+        try
+            return Date.(dates_mdy, format)
+        catch
+            return ymd2.(dates_mdy)
+        end
+    else
+        try
+            return Date.(dates_mdy, format, locale = lang)
+        catch
+            return ymd2.(dates_mdy)
+        end
+    end
+end
+
+function ymd2(date_string::Union{AbstractString, Missing})
 
     if ismissing(date_string)
         return missing
@@ -90,7 +121,48 @@ end
 """
 $docstring_ymd_hms
 """
-function ymd_hms(datetime_string::Union{AbstractString, Missing})
+function ymd_hms(dates_mdy)
+    date_string = dates_mdy
+    format = ""
+    if !ismissing(date_string)
+        if endswith(date_string, r"[AaPp][Mm]")
+            if occursin("-", date_string)
+                if occursin(r"\d{2}:\d{2}:\d{2} [AaPp][Mm]", date_string)
+                    format = "yyyy-mm-dd HH:MM:SS p"
+                else
+                    format = "yyyy-mm-dd HH:MM:SSp"
+                end
+            else
+                if occursin(r"\d{2}:\d{2}:\d{2} [AaPp][Mm]", date_string)
+                    format = "yyyy/mm/dd HH:MM:SS p"
+                else
+                    format = "yyyy/mm/dd HH:MM:SSp"
+                end
+            end
+        else
+            if occursin("-", date_string)
+                format = "yyyy-mm-dd HH:MM:SS"
+            else
+                format = "yyyy/mm/dd HH:MM:SS"
+            end
+        end
+    end
+    if lang == "english"
+        try
+            return DateTime.(dates_mdy, format)
+        catch
+            return ymd_hms2.(dates_mdy)
+        end
+    else
+        try
+            return DateTime.(dates_mdy, format, locale = lang)
+        catch
+            return ymd_hms2.(dates_mdy)
+        end
+    end
+end
+
+function ymd_hms2(datetime_string::Union{AbstractString, Missing})
     # If input is missing, return missing
     if ismissing(datetime_string)
         return missing
