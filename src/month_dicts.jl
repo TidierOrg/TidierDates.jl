@@ -98,7 +98,7 @@ export set_lang
 
 #### For fall back functions
 full_month_to_num = Dict{String, Int}(
-    "JANUARY" => 1, "FEBUARY" => 2, "MARCH" => 3, "APRIL" => 4,
+    "JANUARY" => 1, "FEBRUARY" => 2, "MARCH" => 3, "APRIL" => 4,
     "MAY" => 5, "JUNE" => 6, "JULY" => 7, "AUGUST" => 8,
     "SEPTEMBER" => 9, "OCTOBER" => 10, "NOVEMBER" => 11, "DECEMBER" => 12, 
     #spanish
@@ -133,7 +133,7 @@ abbreviated_month_to_num = Dict{String, Int}(
 
 # All full month names across languages
 full_month = [
-    "JANUARY", "FEBUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", 
+    "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", 
     "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER",
     "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO",
     "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE",
